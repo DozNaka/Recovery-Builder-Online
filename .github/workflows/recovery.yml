@@ -21,7 +21,7 @@ jobs:
 
        - name: Adding and Sync Source
          run: |
-             source config.sh
+             source Config.sh
              mkdir work
              cd work
              repo init -u $MANIFEST -b $BRANCH --depth=1
