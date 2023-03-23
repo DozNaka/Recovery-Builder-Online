@@ -1,4 +1,4 @@
-name: Build Custom Recovery
+name: Building Custom Recovery
 on:
   workflow_dispatch:
 
