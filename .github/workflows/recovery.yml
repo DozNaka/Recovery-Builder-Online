@@ -13,56 +13,6 @@ jobs:
        - name: Remove pkg and Setting repo
          run: |
             sudo apt update && sudo apt install wget zip
-            wget -qO - https://github.com/SA-17/Recovery_builder/raw/main/scripts/Cleanup.sh  | bash
-            sudo -E apt-get -qq update
-            sudo -E apt-get -qq install bc build-essential tar zip curl libstdc++6 git wget python gcc clang libssl-dev repo rsync flex curl  bison aria2
-            sudo curl --create-dirs -L -o /usr/local/bin/repo -O -L https://storage.googleapis.com/git-repo-downloads/repo
-            sudo chmod a+rx /usr/local/bin/repo
-
-       - name: Adding and Sync Source
-         run: |
-             source config.sh
-             mkdir work
-             cd work
-             repo init -u $MANIFEST -b $BRANCH --depth=1
-             repo sync -c -j`nproc` --force-sync --no-clone-bundle --no-tags
-             git clone $DT_LINK -b $DT_BRANCH device/$VENDOR/$DEVICE
-
-       - name: Build recovery
-         run: |
-              source Config.sh
-              cd work
-              . build/envsetup.sh && lunch $TYPE$SYM$DEVICE-eng && export ALLOW_MISSING_DEPENDENCIES=true && mka $TARGET -j`nproc`
-
-       - name: Making file
-         run: |
-              source Config.sh
-              cd work
-              wget -qO - https://github.com/SA-17/Recovery_builder/raw/main/scripts/Bake.sh  | bash
-
-       - name: Release recovery
-         uses: softprops/action-gh-release@v1
-         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-         with:
-          tag_name: ${{ github.run_id }}
-          name: recovery image
-          files: work/recovery.zip
-name: Build Custom Recovery
-on:
-  workflow_dispatch:
-
-jobs:
-  build:
-    runs-on: ubuntu-18.04
-
-    steps:
-       - name: Init the System
-         uses: actions/checkout@master
-
-       - name: Remove pkg and Setting repo
-         run: |
-            sudo apt update && sudo apt install wget zip
             wget -qO - https://github.com/VThang51/Recovery-Builder-Online/raw/main/scripts/Cleanup.sh  | bash
             sudo -E apt-get -qq update
             sudo -E apt-get -qq install bc build-essential tar zip curl libstdc++6 git wget python gcc clang libssl-dev repo rsync flex curl  bison aria2
