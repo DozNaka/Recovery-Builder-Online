@@ -1,4 +1,4 @@
-name: Building "OrangeFox Recovery Project" Version 2
+name: Building "OrangeFox Recovery Project" Version 1.1
 
 on:
 #  release:
@@ -22,7 +22,7 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04(ubuntu-latest)
 
     steps:
        - name: Checkout
@@ -45,7 +45,6 @@ jobs:
        - name: Prepare the build environment
          run: |
               cd ~
-              sudo apt install git aria2 -y
               git clone https://gitlab.com/OrangeFox/misc/scripts
               cd scripts
               sudo bash setup/android_build_env.sh
