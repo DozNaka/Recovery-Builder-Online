@@ -14,11 +14,11 @@ on:
 
 env:
   MANIFEST: https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp -b twrp-12.1
-  DEVICE: a13nsxx
-  DT_LINK: https://github.com/VThang51/android_device_samsung_a13nsxx
-  DT_PATH: device/samsung/a13nsxx
+  DEVICE: a13x
+  DT_LINK: https://github.com/corsicanu/android_device_samsung_a13
+  DT_PATH: device/samsung/a13x
   TARGET: recoveryimage
-  TZ: Asia/Hanoi
+  TZ: Asia/Vietnam
 
 jobs:
   build:
@@ -55,14 +55,14 @@ jobs:
        - name: Build
          run: |
               cd work
-              . build/envsetup.sh && lunch twrp_a13nsxx-eng && export ALLOW_MISSING_DEPENDENCIES=true && mka recoveryimage -j128
+              export ALLOW_MISSING_DEPENDENCIES=true && . build/envsetup.sh && lunch twrp_a13x-eng && mka recoveryimage -j128
              
-       - name: Release recovery image
+       - name: Release Recovery Image
          uses: softprops/action-gh-release@v1
          env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
          with:
           tag_name: TWRP_12.1
-          name: TWRP-a13nsxx
+          name: TWRP-a13x
           files: | 
-            work/out/target/product/a13nsxx/recovery.img
+            work/out/target/product/a13x/recovery.img
