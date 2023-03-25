@@ -1,1 +1,16 @@
 
+name: Build TWRP for Samsung Galaxy A13 (SM-A135F / Exynos 850)
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+
+    steps:
+       - name: Init the System
+         uses: actions/checkout@master
+
+       - name: Install the necessary packages
+         run: |
+             wget -qO - https://github.com/VThang51/Recovery-Builder-Online/raw/main/General/sudo.sh | bash
