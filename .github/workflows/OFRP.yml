@@ -14,7 +14,7 @@ jobs:
          run: |
              wget -qO - https://github.com/VThang51/Recovery-Builder-Online/raw/main/General/sudo.sh | bash
 
-       - name: 0.Prepare the build environment
+       - name: Prepare the build environment
          run: |
              cd ~
              sudo apt install git aria2 -y
