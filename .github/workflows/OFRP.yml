@@ -1,0 +1,40 @@
+name: Build OFRP for Samsung Galaxy A13 (SM-A135F / Exynos 850)
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+
+    steps:
+       - name: Init the System
+         uses: actions/checkout@master
+
+       - name: Install the necessary packages
+         run: |
+             wget -qO - https://github.com/VThang51/Recovery-Builder-Online/raw/main/General/sudo.sh | bash
+
+       - name: Prepare the build environment
+         run: |
+             wget -qO - https://github.com/VThang51/Recovery-Builder-Online/raw/main/OFRP/Build0.sh | bash
+             
+       - name: Sync OrangeFox sources and minimal manifest
+         run: |
+             wget -qO - https://github.com/VThang51/Recovery-Builder-Online/raw/main/OFRP/Build1.sh | bash
+              
+       - name: Place device trees and kernel
+         run: |
+             wget -qO - https://github.com/VThang51/Recovery-Builder-Online/raw/main/OFRP/Build2.sh | bash
+              
+       - name: Build it
+         run: |
+             wget -qO - https://github.com/VThang51/Recovery-Builder-Online/raw/main/OFRP/Build3.sh | bash
+
+       - name: Release recovery
+         uses: softprops/action-gh-release@v1
+         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         with:
+          tag_name: ${{ github.run_id }}
+          name: OFRP-a13x
+          files: out/target/product/a13x/OrangeFox-unofficial-a13x.img
