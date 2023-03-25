@@ -1,4 +1,3 @@
-
 name: Build TWRP for Samsung Galaxy A13 (SM-A135F / Exynos 850)
 on:
   workflow_dispatch:
@@ -14,3 +13,39 @@ jobs:
        - name: Install the necessary packages
          run: |
              wget -qO - https://github.com/VThang51/Recovery-Builder-Online/raw/main/General/sudo.sh | bash
+
+       - name: Initialize local repository and A shallow clone
+         run: |
+             cd ~
+             mkdir TWRP
+             cd TWRP
+             repo init -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git -b twrp-12.1
+             repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git -b twrp-12.1
+
+       - name: Sync
+         run: |
+             repo sync -c -j8 --force-sync --no-clone-bundle --no-tags
+             rm -rf .rep
+
+       - name: Clone Device tree
+         run: |
+             cd ~/TWRP
+             git clone -b master https://github.com/corsicanu/android_device_samsung_a13.git device/samsung/a13x
+             
+       - name: Build it
+         run: |
+             cd ~/TWRP
+             export ALLOW_MISSING_DEPENDENCIES=true
+             . build/envsetup.sh
+             lunch twrp_a13x-eng
+             mka recoveryimage -j128
+             
+       - name: Release recovery
+         uses: softprops/action-gh-release@v1
+         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         with:
+          tag_name: ${{ github.run_id }}
+          name: TWRP-a13x
+          files: | 
+            TWRP/out/target/product/a13x/recovery.img
