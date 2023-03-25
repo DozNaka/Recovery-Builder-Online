@@ -16,7 +16,6 @@ jobs:
 
        - name: Initialize local repository and A shallow clone
          run: |
-             cd ~
              mkdir TWRP
              cd TWRP
              repo init -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git -b twrp-12.1
