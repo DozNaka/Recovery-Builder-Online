@@ -28,12 +28,10 @@ jobs:
 
        - name: Clone Device tree
          run: |
-             cd ~/TWRP
              git clone -b master https://github.com/corsicanu/android_device_samsung_a13.git device/samsung/a13x
              
        - name: Build it
          run: |
-             cd ~/TWRP
              export ALLOW_MISSING_DEPENDENCIES=true
              . build/envsetup.sh
              lunch twrp_a13x-eng
