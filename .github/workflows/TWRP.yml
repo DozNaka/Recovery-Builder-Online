@@ -24,6 +24,7 @@ jobs:
 
        - name: Sync
          run: |
+             repo init
              repo sync -c -j8 --force-sync --no-clone-bundle --no-tags
              rm -rf .rep
 
