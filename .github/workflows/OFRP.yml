@@ -17,25 +17,34 @@ jobs:
        - name: Prepare the build environment
          run: |
              cd ~
-             sudo apt install git aria2 -y
-             git clone https://gitlab.com/OrangeFox/misc/scripts
+             git clone https://gitlab.com/VThang51/scripts
              cd scripts
-             wget -qO - https://github.com/VThang51/Recovery-Builder-Online/raw/main/OFRP/Build0.sh | bash
+             sudo bash setup/android_build_env.sh
+             sudo bash setup/install_android_sdk.sh
              
        - name: Sync OrangeFox sources and minimal manifest
          run: |
-             cd ~
-             git clone https://gitlab.com/OrangeFox/misc/scripts
-             cd scripts
-             wget -qO - https://github.com/VThang51/Recovery-Builder-Online/raw/main/OFRP/Build1.sh | bash
+             mkdir ~/OrangeFox_sync
+             cd ~/OrangeFox_sync
+             git clone https://gitlab.com/OrangeFox/sync.git
+             cd ~/OrangeFox_sync/sync/
+             ./orangefox_sync.sh --branch 12.1 --path ~/fox_12.1
               
        - name: Place device trees and kernel
          run: |
-             wget -qO - https://github.com/VThang51/Recovery-Builder-Online/raw/main/OFRP/Build2.sh | bash
-              
+             cd ~/fox_12.1
+             git clone -b master https://github.com/corsicanu/android_device_samsung_a13.git device/samsung/a13x
+
        - name: Build it
          run: |
-             wget -qO - https://github.com/VThang51/Recovery-Builder-Online/raw/main/OFRP/Build3.sh | bash
+             cd ~/OrangeFox # (or whichever directory has the synced manifest)
+             source build/envsetup.sh
+             export ALLOW_MISSING_DEPENDENCIES=true
+             export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
+             export LC_ALL="C"
+             export OF_AB_DEVICE=1
+             export OF_USE_MAGISKBOOT_FOR_ALL_PATCHES=1
+             lunch twrp_<device>-eng && mka adbd bootimage
 
        - name: Release recovery
          uses: softprops/action-gh-release@v1
