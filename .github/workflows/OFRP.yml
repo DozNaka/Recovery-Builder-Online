@@ -14,12 +14,15 @@ jobs:
          run: |
              wget -qO - https://github.com/VThang51/Recovery-Builder-Online/raw/main/General/sudo.sh | bash
 
-       - name: Prepare the build environment
+       - name: 0.Prepare the build environment
          run: |
              wget -qO - https://github.com/VThang51/Recovery-Builder-Online/raw/main/OFRP/Build0.sh | bash
              
        - name: Sync OrangeFox sources and minimal manifest
          run: |
+             cd ~
+             git clone https://gitlab.com/OrangeFox/misc/scripts
+             cd scripts
              wget -qO - https://github.com/VThang51/Recovery-Builder-Online/raw/main/OFRP/Build1.sh | bash
               
        - name: Place device trees and kernel
