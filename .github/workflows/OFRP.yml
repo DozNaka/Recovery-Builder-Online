@@ -16,6 +16,10 @@ jobs:
 
        - name: 0.Prepare the build environment
          run: |
+             cd ~
+             sudo apt install git aria2 -y
+             git clone https://gitlab.com/OrangeFox/misc/scripts
+             cd scripts
              wget -qO - https://github.com/VThang51/Recovery-Builder-Online/raw/main/OFRP/Build0.sh | bash
              
        - name: Sync OrangeFox sources and minimal manifest
