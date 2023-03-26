@@ -14,27 +14,15 @@ jobs:
          run: |
              wget -qO - https://github.com/VThang51/Recovery-Builder-Online/raw/main/General/sudo.sh | bash
 
-       - name: Maintaining Authorship
-         run: |
-             git config --global user.name "VThang51"
-             git config --global user.email "vietthang0511.2@gmail.com"
-             git commit --amend --author "Author vietthang0511.2@gmail.com"
-             git commit --author="Author vietthang0511.2@gmail.com"
-
        - name: Initialize local repository and A shallow clone
          run: |
              mkdir TWRP
              cd TWRP
-             repo init -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git -b twrp-12.1 --depth=1
+             wget -qO - https://github.com/VThang51/Recovery-Builder-Online/raw/main/TWRP/Build1.sh | bash
 
-       - name: Sync
+       - name: Sync and Clone Device Tree
          run: |
-             repo sync -c -j4 --force-sync --no-clone-bundle --no-tags
-
-       - name: Clone Device tree
-         run: |
-             git clone -b master https://github.com/corsicanu/android_device_samsung_a13.git device/samsung/a13x
-             
+             wget -qO - https://github.com/VThang51/Recovery-Builder-Online/raw/main/TWRP/Build2.sh
        - name: Build it
          run: |
              export ALLOW_MISSING_DEPENDENCIES=true
@@ -50,4 +38,4 @@ jobs:
           tag_name: ${{ github.run_id }}
           name: TWRP-a13x
           files: | 
-            TWRP/out/target/product/a13x/recovery.img
+                TWRP/out/target/product/a13x/recovery.img
