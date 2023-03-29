@@ -58,5 +58,19 @@ on:
         default: 'recoveryimage'
         type: choice
         options:
-        - recoveryimage
-        - bootimage
+        BUILD_TARGET:
+          description: 'Build Target'
+          required: true
+          default: 'recoveryimage'
+          type: choice
+          options:
+          - recoveryimage
+          - bootimage
+        BUILD_TARGET:
+          description: 'Build Target'
+          required: true
+          default: 'recoveryimage'
+          type: choice
+          options:
+          - recoveryimage
+          - bootimage
