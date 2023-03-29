@@ -58,3 +58,64 @@ jobs:
           name: TWRP-a13x
           files: | 
             work/out/target/product/a13x/recovery.img
+name: TWRP Builder
+on:
+  workflow_dispatch:
+    inputs:
+      GH_USERNAME:
+        description: 'GitHub Username'
+        required: true
+      GH_EMAIL:
+        description: 'GitHub Email'
+        required: true
+      MANIFEST_URL:
+        description: 'Manifest URL'
+        required: true
+        default: 'https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp'
+        type: choice
+        options:
+        - 'https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni'
+        - 'https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp'
+      MANIFEST_BRANCH:
+        description: 'Manifest Branch'
+        required: true
+        default: 'twrp-12.1'
+        type: choice
+        options:
+        - twrp-4.4-deprecated
+        - twrp-5.1
+        - twrp-6.0
+        - twrp-7.1
+        - twrp-8.1
+        - twrp-9.0
+        - twrp-10.0-deprecated
+        - twrp-11
+        - twrp-12.1
+      DEVICE_TREE_URL:
+        description: 'Device Tree URL'
+        required: true
+        default: 'https://github.com/TeamWin/android_device_asus_I003D'
+      DEVICE_TREE_BRANCH:
+        description: 'Device Tree Branch'
+        required: true
+        default: 'android-12.1'
+      DEVICE_PATH:
+        description: 'Device Path'
+        required: true
+        default: 'device/asus/I003D'
+      DEVICE_NAME:
+        description: 'Device Name'
+        required: true
+        default: 'I003D'
+      MAKEFILE_NAME:
+        description: 'Makefile Name'
+        required: true
+        default: 'twrp_I003D'
+      BUILD_TARGET:
+        description: 'Build Target'
+        required: true
+        default: 'recoveryimage'
+        type: choice
+        options:
+        - recoveryimage
+        - bootimage
