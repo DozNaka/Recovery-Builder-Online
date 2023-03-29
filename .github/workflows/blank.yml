@@ -38,12 +38,6 @@ on:
         description: 'Device Path'
         required: true
         default: 'device/asus/I003D'
-      COMMON_TREE_URL:
-        description: 'COMMON_TREE_URL (if no common tree, leave blank)'
-        required: false
-      COMMON_PATH:
-        description: 'COMMON_PATH (if no common tree, leave blank)'
-        required: false
       DEVICE_NAME:
         description: 'Device Name'
         required: true
@@ -58,19 +52,5 @@ on:
         default: 'recoveryimage'
         type: choice
         options:
-        - BUILD_TARGET:
-            description: 'Build Target'
-            required: true
-            default: 'recoveryimage'
-            type: choice
-            options:
-            - recoveryimage
-            - bootimage
-        - BUILD_TARGET:
-            description: 'Build Target'
-            required: true
-            default: 'recoveryimage'
-            type: choice
-            options:
-            - recoveryimage
-            - bootimage
+        - recoveryimage
+        - bootimage
