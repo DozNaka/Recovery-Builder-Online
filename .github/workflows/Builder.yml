@@ -38,23 +38,23 @@ on:
       DEVICE_TREE_URL:
         description: 'Device Tree URL'
         required: true
-        default: 'https://github.com/TeamWin/android_device_asus_I003D'
+        default: 'https://github.com/VThang51/android_device_samsung_a13'
       DEVICE_TREE_BRANCH:
         description: 'Device Tree Branch'
         required: true
-        default: 'android-12.1'
+        default: 'master'
       DEVICE_PATH:
         description: 'Device Path'
         required: true
-        default: 'device/asus/I003D'
+        default: 'device/samsung/a13x'
       DEVICE_NAME:
         description: 'Device Name'
         required: true
-        default: 'I003D'
+        default: 'a13x'
       MAKEFILE_NAME:
         description: 'Makefile Name'
         required: true
-        default: 'twrp_I003D'
+        default: 'twrp_a13x'
       BUILD_TARGET:
         description: 'Build Target'
         required: true
