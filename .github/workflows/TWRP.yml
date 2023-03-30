@@ -100,7 +100,7 @@ jobs:
       - name: Clone device tree
         run: |
           cd ~/twrp
-          git clone ${{ inputs.DEVICE_TREE_URL }} -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_PATH }}
+          git clone -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_TREE_URL }} ${{ inputs.DEVICE_PATH }}
 
       - name: Building recovery
         run: |
