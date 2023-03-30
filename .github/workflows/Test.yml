@@ -16,6 +16,7 @@ on:
         options:
         - omni
         - aosp
+        - lineageos
       MANIFEST_BRANCH:
         description: 'Manifest Branch'
         required: true
@@ -31,6 +32,7 @@ on:
         - twrp-10.0-deprecated
         - twrp-11
         - twrp-12.1
+        - twrp-14.1
       DEVICE_TREE_URL:
         description: 'Device Tree URL'
         required: true
