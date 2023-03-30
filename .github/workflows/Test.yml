@@ -4,6 +4,7 @@ on:
     inputs:
       GH_USERNAME:
         description: 'GitHub Username'
+        description: 'test'
         required: true
       GH_EMAIL:
         description: 'GitHub Email'
