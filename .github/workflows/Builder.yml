@@ -72,6 +72,8 @@ jobs:
 
       - name: Cleanup
         uses: rokibhasansagar/slimhub_actions@main
+        run: |
+             curl -LO https://raw.githubusercontent.com/VThang51/Recovery-Builder-Online/main/General/Cleanup.sh && bash Cleanup.sh
 
       - name: Prepare the environment
         run: |
