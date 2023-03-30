@@ -18,7 +18,6 @@ on:
           - omni
           - aosp
           - lineageos
-      if: ${{ inputs.MANIFEST_URL == 'omni' }}
       MANIFEST_BRANCH:
         description: 'Manifest Branch'
         required: true
@@ -63,3 +62,48 @@ on:
         options:
           - recovery
           - boot
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Prepare the environment
+      run: |
+        sudo rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/apt/sources.list.d
+        docker rmi `docker images -q`
+        sudo apt-get remove account-plugin-facebook account-plugin-flickr account-plugin-jabber account-plugin-salut account-plugin-twitter account-plugin-windows-live account-plugin-yahoo aisleriot brltty duplicity empathy empathy-common example-content gnome-accessibility-themes gnome-contacts gnome-mahjongg gnome-mines gnome-orca gnome-screensaver gnome-sudoku gnome-video-effects gnomine landscape-common libreoffice-avmedia-backend-gstreamer libreoffice-base-core libreoffice-calc libreoffice-common libreoffice-core libreoffice-draw libreoffice-gnome libreoffice-gtk libreoffice-impress libreoffice-math libreoffice-ogltrans libreoffice-pdfimport libreoffice-style-galaxy libreoffice-style-human libreoffice-writer libsane libsane-common mcp-account-manager-uoa python3-uno rhythmbox rhythmbox-plugins rhythmbox-plugin-zeitgeist sane-utils shotwell shotwell-common telepathy-gabble telepathy-haze telepathy-idle telepathy-indicator telepathy-logger telepathy-mission-control-5 telepathy-salut totem totem-common totem-plugins printer-driver-brlaser printer-driver-foo2zjs printer-driver-foo2zjs-common printer-driver-m2300w printer-driver-ptouch printer-driver-splix
+        sudo -E apt-get -qq update
+        sudo -E apt-get -qq install bc build-essential zip curl libstdc++6 git wget python3 python2.7 python-pip gcc clang libssl-dev repo rsync flex curl bison aria2
+        mkdir ~/bin
+        curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+        chmod a+x ~/bin/repo
+        sudo ln -sf ~/bin/repo /usr/bin/repo
+
+    - name: Repo Sync
+      run: |
+        mkdir twrp
+        cd twrp
+        git config --global user.name "${{ inputs.GH_USERNAME }}"
+        git config --global user.email "${{ inputs.GH_EMAIL }}"
+        repo init -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_${{ inputs.MANIFEST_URL }}.git -b ${{ inputs.MANIFEST_BRANCH }}
+        repo sync -c -j4 --force-sync --no-clone-bundle --no-tags
+        rm -rf .rep
+      
+    - name: Clone device tree
+      run: |
+        git clone ${{ inputs.DEVICE_TREE_URL }} -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_PATH }}
+
+    - name: Building recovery
+      run: |
+          . build/envsetup.sh
+          export ALLOW_MISSING_DEPENDENCIES=true
+          lunch ${{ inputs.MAKEFILE_NAME }}-eng
+          mka ${{ inputs.BUILD_TARGET }}image -j128
+
+    - name: Upload to Release
+      uses: softprops/action-gh-release@v1
+      with:
+        name: ${{ inputs.DEVICE_NAME }}
+        files: twrp/out/target/product/${{ github.event.inputs.DEVICE_NAME }}/${{ github.event.inputs.BUILD_TARGET }}.img
+        tag_name: ${{ github.run_id }}
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
