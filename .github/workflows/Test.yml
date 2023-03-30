@@ -103,7 +103,7 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         name: ${{ inputs.DEVICE_NAME }}
-        files: twrp/out/target/product/${{ github.event.inputs.DEVICE_NAME }}/${{ github.event.inputs.BUILD_TARGET }}.img
+        files: twrp/out/target/product/${{ inputs.DEVICE_NAME }}/${{ inputs.BUILD_TARGET }}.img
         tag_name: ${{ github.run_id }}
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
