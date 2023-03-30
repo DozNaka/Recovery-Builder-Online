@@ -1,56 +1,121 @@
-name: Build OFRP for Samsung Galaxy A13 (SM-A135F / Exynos 850)
+name: OFRP Builder
 on:
   workflow_dispatch:
-
+    inputs:
+      BRANCH:
+        description: 'Branch'
+        required: true
+        default: '12.1'
+        type: choice
+        options:
+        - '11.0'
+        - '12.1'
+      DEVICE_TREE_URL:
+        description: 'Device Tree URL'
+        required: true
+        default: 'https://github.com/VThang51/android_device_samsung_a13'
+      DEVICE_TREE_BRANCH:
+        description: 'Device Tree Branch'
+        required: true
+        default: 'master'
+      DEVICE_PATH:
+        description: 'Device Path'
+        required: true
+        default: 'device/samsung/a13x'
+      DEVICE_NAME:
+        description: 'Device Name'
+        required: true
+        default: 'a13x'
+      MAKEFILE_NAME:
+        description: 'Makefile Name'
+        required: true
+        default: 'twrp_a13x'
+      PARTITION:
+        description: 'Partition Device'
+        required: true
+        default: 'A-only'
+        type: choice
+        options:
+        - 'A-only'
+        - 'A/B'
+      BUILD_TARGET:
+        description: 'Build Target'
+        required: true
+        default: 'recovery'
+        type: choice
+        options:
+          - 'recovery'
+          - 'boot'
+          - 'adbd recovery'
+          - 'adbd boot'
 jobs:
   build:
-    runs-on: ubuntu-18.04
-
+    runs-on: ubuntu-20.04
     steps:
-       - name: Init the System
-         uses: actions/checkout@master
+      - name: Checkout
+        uses: actions/checkout@master
 
-       - name: Install the necessary packages
-         run: |
-             wget -qO - https://github.com/VThang51/Recovery-Builder-Online/raw/main/General/sudo.sh | bash
+      - name: Cleanup
+        run: |
+          curl -LO https://github.com/VThang51/Recovery-Builder-Online/raw/main/General/Cleanup.sh | bash
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf "/usr/local/share/boost"
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
 
-       - name: Prepare the build environment
-         run: |
-             cd ~
-             git clone https://gitlab.com/VThang51/scripts
-             cd scripts
-             sudo bash setup/android_build_env.sh
-             sudo bash setup/install_android_sdk.sh
-             
-       - name: Sync OrangeFox sources and minimal manifest
-         run: |
-             mkdir ~/OrangeFox_sync
-             cd ~/OrangeFox_sync
-             git clone https://gitlab.com/OrangeFox/sync.git
-             cd ~/OrangeFox_sync/sync/
-             ./orangefox_sync.sh --branch 12.1 --path ~/fox_12.1
-              
-       - name: Place device trees and kernel
-         run: |
-             cd ~/fox_12.1
-             git clone -b master https://github.com/corsicanu/android_device_samsung_a13.git device/samsung/a13x
+      - name: Prepare the build environment
+        run: |
+          sudo apt-get -y update
+          sudo apt-get -y upgrade
+          sudo apt-get -y install bc build-essential zip curl libstdc++6 git wget python python2 gcc clang libssl-dev rsync flex curl bison aria2
+          mkdir ~/bin
+          curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+          chmod a+x ~/bin/repo
+          sudo ln -sf ~/bin/repo /usr/bin/repo
+          cd ~
+          git clone https://gitlab.com/OrangeFox/misc/scripts
+          cd scripts
+          sudo bash setup/android_build_env.sh
+          sudo bash setup/install_android_sdk.sh
+        continue-on-error: true
+        
+      - name: Sync OrangeFox sources and minimal manifest
+        run: |
+          mkdir ~/OrangeFox_sync
+          cd ~/OrangeFox_sync
+          git clone https://gitlab.com/OrangeFox/sync.git
+          cd ~/OrangeFox_sync/sync/
+          ./orangefox_sync.sh --branch ${{ inputs.BRANCH }} --path ~/fox_${{ inputs.BRANCH }}
 
-       - name: Build it
-         run: |
-             cd ~/OrangeFox # (or whichever directory has the synced manifest)
-             source build/envsetup.sh
-             export ALLOW_MISSING_DEPENDENCIES=true
-             export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
-             export LC_ALL="C"
-             export OF_AB_DEVICE=1
-             export OF_USE_MAGISKBOOT_FOR_ALL_PATCHES=1
-             lunch twrp_<device>-eng && mka adbd bootimage
+      - name: Place device trees and kernel
+        run: |
+          cd ~/fox_${{ inputs.BRANCH }}
+          git clone -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_TREE_URL }} ${{ inputs.DEVICE_PATH }}
+          
+      - name: Build it
+        run: |
+          cd ~/OrangeFox
+          source build/envsetup.sh
+          export ALLOW_MISSING_DEPENDENCIES=true
+          export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
+          export LC_ALL="C"
+      - if: ${{ inputs.PARTITION == 'A/B' }}
+        run: |
+          export OF_AB_DEVICE=1
+          export OF_USE_MAGISKBOOT_FOR_ALL_PATCHES=1
+        run: |
+          lunch ${{ inputs.MAKEFILE_NAME }}-eng
+          mka ${{ inputs.BUILD_TARGET }}image
 
-       - name: Release recovery
-         uses: softprops/action-gh-release@v1
-         env:
+      - name: Upload to Release
+        uses: softprops/action-gh-release@v1
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-         with:
+        with:
+          name: ${{ inputs.DEVICE_NAME }}
           tag_name: ${{ github.run_id }}
-          name: OFRP-a13x
-          files: out/target/product/a13x/OrangeFox-unofficial-a13x.img
+          body: |
+            Manifest: ${{ inputs.BRANCH }}
+            Device: ${{ inputs.DEVICE_NAME }}
+            Target: ${{ inputs.BUILD_TARGET }}.img
+          files: out/target/product/${{ inputs.DEVICE_NAME }}/OrangeFox-unofficial-${{ inputs.DEVICE_NAME }}.img
