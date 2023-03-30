@@ -14,7 +14,7 @@ on:
         default: 'https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp'
         type: choice
         options:
-        - [Omni]'https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni'
+        - Omni 'https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni'
         - 'https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp'
       MANIFEST_BRANCH:
         description: 'Manifest Branch'
