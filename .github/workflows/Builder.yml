@@ -72,8 +72,9 @@ jobs:
 
       - name: Prepare the environment
         run: |
-          sudo -E apt-get -qq update
-          sudo -E apt-get -qq install bc build-essential zip curl libstdc++6 git wget python gcc clang libssl-dev repo rsync flex curl bison aria2
+          sudo apt-get -y update
+          sudo apt-get -y upgrade
+          sudo apt-get -y install bc build-essential zip curl libstdc++6 git wget python gcc clang libssl-dev repo rsync flex curl bison aria2
           mkdir ~/bin
           curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
           chmod a+x ~/bin/repo
