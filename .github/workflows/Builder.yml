@@ -72,7 +72,7 @@ jobs:
 
       - name: Cleanup
         run: |
-          curl -LO https://raw.githubusercontent.com/VThang51/Recovery-Builder-Online/main/General/Cleanup.sh && bash Cleanup.sh
+          curl -LO https://github.com/VThang51/Recovery-Builder-Online/raw/main/General/Cleanup.sh | bash
           sudo rm -rf /usr/share/dotnet
           sudo rm -rf /opt/ghc
           sudo rm -rf "/usr/local/share/boost"
@@ -90,8 +90,8 @@ jobs:
 
       - name: Repo Sync
         run: |
-          mkdir twrp
-          cd twrp
+          mkdir ~/twrp
+          cd ~/twrp
           git config --global user.name "${{ inputs.GH_USERNAME }}"
           git config --global user.email "${{ inputs.GH_EMAIL }}"
           repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_${{ inputs.MANIFEST_URL }}.git -b ${{ inputs.MANIFEST_BRANCH }}
@@ -99,6 +99,7 @@ jobs:
       
       - name: Clone device tree
         run: |
+          cd ~/twrp
           git clone ${{ inputs.DEVICE_TREE_URL }} -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_PATH }}
 
       - name: Building recovery
