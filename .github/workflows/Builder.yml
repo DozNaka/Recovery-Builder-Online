@@ -104,7 +104,8 @@ jobs:
 
       - name: Building recovery
         run: |
-          . build/envsetup.sh
+          cd ~/twrp
+          ./build/envsetup.sh
           export ALLOW_MISSING_DEPENDENCIES=true
           lunch ${{ inputs.MAKEFILE_NAME }}-eng
           mka ${{ inputs.BUILD_TARGET }}image -j128
