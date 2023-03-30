@@ -66,6 +66,9 @@ jobs:
   build:
     runs-on: ubuntu-20.04
     steps:
+      - name: Checkout
+      uses: actions/checkout@master
+
       - name: Prepare the environment
       run: |
         sudo rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/apt/sources.list.d
