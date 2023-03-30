@@ -22,15 +22,15 @@ on:
         default: '12.1'
         type: choice
         options:
-        - 4.4-deprecated
-        - 5.1
-        - 6.0
-        - 7.1
-        - 8.1
-        - 9.0
-        - 10.0-deprecated
-        - 11
-        - 12.1
+        - twrp-4.4-deprecated
+        - twrp-5.1
+        - twrp-6.0
+        - twrp-7.1
+        - twrp-8.1
+        - twrp-9.0
+        - twrp-10.0-deprecated
+        - twrp-11
+        - twrp-12.1
       DEVICE_TREE_URL:
         description: 'Device Tree URL'
         required: true
