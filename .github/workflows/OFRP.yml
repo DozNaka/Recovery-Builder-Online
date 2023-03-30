@@ -96,6 +96,8 @@ jobs:
         run: |
           cd ~/OrangeFox
           source build/envsetup.sh
+      - if: ${{ inputs.PARTITION == 'A-only' }}
+        run: |
           export ALLOW_MISSING_DEPENDENCIES=true
           export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
           export LC_ALL="C"
@@ -103,7 +105,6 @@ jobs:
         run: |
           export OF_AB_DEVICE=1
           export OF_USE_MAGISKBOOT_FOR_ALL_PATCHES=1
-        run: |
           lunch ${{ inputs.MAKEFILE_NAME }}-eng
           mka ${{ inputs.BUILD_TARGET }}image
 
