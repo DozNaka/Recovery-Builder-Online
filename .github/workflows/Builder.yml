@@ -11,7 +11,7 @@ on:
         required: true
         default: 'vietthang0511.2@gmail.com'
       MANIFEST_URL:
-        description: 'Manifest URL'
+        description: 'Manifest'
         required: true
         default: 'aosp'
         type: choice
@@ -71,16 +71,15 @@ jobs:
         uses: actions/checkout@master
 
       - name: Cleanup
-        uses: rokibhasansagar/slimhub_actions@main
         run: |
-             curl -LO https://raw.githubusercontent.com/VThang51/Recovery-Builder-Online/main/General/Cleanup.sh && bash Cleanup.sh
-
-      - name: Prepare the environment
-        run: |
+          curl -LO https://raw.githubusercontent.com/VThang51/Recovery-Builder-Online/main/General/Cleanup.sh && bash Cleanup.sh
           sudo rm -rf /usr/share/dotnet
           sudo rm -rf /opt/ghc
           sudo rm -rf "/usr/local/share/boost"
           sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+
+      - name: Prepare the environment
+        run: |
           sudo apt-get -y update
           sudo apt-get -y upgrade
           sudo apt-get -y install bc build-essential zip curl libstdc++6 git wget python python2 gcc clang libssl-dev rsync flex curl bison aria2
