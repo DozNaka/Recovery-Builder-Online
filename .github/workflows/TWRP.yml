@@ -1,7 +1,14 @@
-name: TWRP Builder
+name: TWRP Builder v1.0
 on:
   workflow_dispatch:
     inputs:
+      XXRP:
+        description: 'Recovery Type'
+        required: true
+        default: 'TeamWin Recovery Project (TWRP)'
+        type: choice
+        opitions:
+          - 'TeamWin Recovery Project (TWRP)'
       GH_USERNAME:
         description: 'GitHub Username'
         required: true
@@ -10,31 +17,33 @@ on:
         description: 'GitHub Email'
         required: true
         default: 'vietthang0511.2@gmail.com'
-      MANIFEST_URL:
-        description: 'Manifest'
+      MANIFEST_TYPE:
+        description: 'Manifest Type'
         required: true
         default: 'aosp'
         type: choice
         options:
-        - omni
-        - aosp
-        - lineageos
+        - 'omni'
+        - 'aosp'
       MANIFEST_BRANCH:
         description: 'Manifest Branch'
         required: true
         default: 'twrp-12.1'
         type: choice
         options:
-        - twrp-4.4-deprecated
-        - twrp-5.1
-        - twrp-6.0
-        - twrp-7.1
-        - twrp-8.1
-        - twrp-9.0
-        - twrp-10.0-deprecated
-        - twrp-11
-        - twrp-12.1
-        - twrp-14.1
+        - 'twrp-4.4-deprecated'
+        - 'twrp-5.1'
+        - 'twrp-6.0'
+        - 'twrp-7.1'
+        - 'twrp-8.1'
+        - 'twrp-9.0'
+        - 'twrp-10.0-deprecated'
+        - 'twrp-11'
+        - 'twrp-12.1'
+      DEVICE_NAME:
+        description: 'Device Name'
+        required: true
+        default: 'Samsung Galaxy A13'
       DEVICE_TREE_URL:
         description: 'Device Tree URL'
         required: true
@@ -43,26 +52,30 @@ on:
         description: 'Device Tree Branch'
         required: true
         default: 'master'
-      DEVICE_PATH:
-        description: 'Device Path'
+      BRAND:
+        description: 'Brand'
         required: true
-        default: 'device/samsung/a13x'
-      DEVICE_NAME:
-        description: 'Device Name'
+        default: 'samsung'
+      DEVICE_CODE:
+        description: 'Device Code'
         required: true
         default: 'a13x'
-      MAKEFILE_NAME:
-        description: 'Makefile Name'
+      MAKEFILE_TYPE:
+        description: 'Makefile Type'
         required: true
-        default: 'twrp_a13x'
+        default: 'twrp'
+        type: choice
+        opitions:
+          - 'omni'
+          - 'twrp'
       BUILD_TARGET:
         description: 'Build Target'
         required: true
         default: 'recovery'
         type: choice
         options:
-          - recovery
-          - boot
+          - 'recovery'
+          - 'boot'
 jobs:
   build:
     runs-on: ubuntu-20.04
@@ -101,7 +114,7 @@ jobs:
       - name: Clone device tree
         run: |
           cd ~/twrp
-          git clone -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_TREE_URL }} ${{ inputs.DEVICE_PATH }}
+          git clone -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_TREE_URL }} device/${{ inputs.BRAND }}/${{ inputs.DEVICE_CODE }}
 
       - name: Building recovery
         run: |
@@ -109,18 +122,20 @@ jobs:
           chmod 777 build/envsetup.sh
           ./build/envsetup.sh
           export ALLOW_MISSING_DEPENDENCIES=true
-          lunch ${{ inputs.MAKEFILE_NAME }}-eng
-          mka ${{ inputs.BUILD_TARGET }}image -j128
+          lunch ${{ inputs.MAKEFILE_TYPE }}_${{ inputs.DEVICE_CODE }}-eng
+          mka ${{ inputs.BUILD_TARGET }}image
 
       - name: Upload to Release
         uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: ${{ inputs.DEVICE_NAME }}
+          name: Custom Recovery for ${{ inputs.DEVICE_NAME }}
           tag_name: ${{ github.run_id }}
           body: |
-            Manifest: ${{ github.event.inputs.MANIFEST_BRANCH }}
-            Device: ${{ github.event.inputs.DEVICE_NAME }}
-            Target: ${{ github.event.inputs.BUILD_TARGET }}.img
-          files: twrp/out/target/product/${{ inputs.DEVICE_NAME }}/${{ inputs.BUILD_TARGET }}.img
+            Device: ${{ inputs.DEVICE_NAME }}
+            Type: ${{ inputs.XXRP }}
+            Manifest: ${{ inputs.MANIFEST_BRANCH }}
+            Target: ${{ inputs.BUILD_TARGET }}
+            File: ${{ inputs.BUILD_TARGET }}.img
+          files: twrp/out/target/product/${{ inputs.DEVICE_CODE }}/${{ inputs.BUILD_TARGET }}.img
