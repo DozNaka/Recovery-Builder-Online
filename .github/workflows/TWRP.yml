@@ -9,6 +9,7 @@ on:
         type: choice
         opitions:
           - 'TeamWin Recovery Project'
+          - 'OrangeFox Recovery Project'
       GH_USERNAME:
         description: 'GitHub Username'
         required: true
