@@ -1,8 +1,8 @@
-name: TWRP Builder v1.0
+name: TWRP Builder
 on:
   workflow_dispatch:
     inputs:
-      XXRP:
+      RECOVERY:
         description: 'Recovery Type'
         required: true
         default: 'TeamWin Recovery Project (TWRP)'
@@ -134,7 +134,7 @@ jobs:
           tag_name: ${{ github.run_id }}
           body: |
             Device: ${{ inputs.DEVICE_NAME }}
-            Type: ${{ inputs.XXRP }}
+            Type: ${{ inputs.RECOVERY }}
             Manifest: ${{ inputs.MANIFEST_BRANCH }}
             Target: ${{ inputs.BUILD_TARGET }}
             File: ${{ inputs.BUILD_TARGET }}.img
