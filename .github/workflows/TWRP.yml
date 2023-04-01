@@ -5,10 +5,10 @@ on:
       RECOVERY:
         description: 'Recovery Type'
         required: true
-        default: 'TeamWin Recovery Project (TWRP)'
+        default: 'TeamWin Recovery Project'
         type: choice
         opitions:
-          - 'TeamWin Recovery Project (TWRP)'
+          - 'TeamWin Recovery Project'
       GH_USERNAME:
         description: 'GitHub Username'
         required: true
