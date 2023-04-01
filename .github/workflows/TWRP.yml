@@ -2,14 +2,6 @@ name: TWRP Builder
 on:
   workflow_dispatch:
     inputs:
-      RECOVERY:
-        description: 'Recovery Type'
-        required: true
-        default: 'TeamWin Recovery Project'
-        type: choice
-        options:
-          - 'TeamWin Recovery Project'
-          - 'OrangeFox Recovery Project'
       GH_USERNAME:
         description: 'GitHub Username'
         required: true
@@ -41,10 +33,6 @@ on:
         - 'twrp-10.0-deprecated'
         - 'twrp-11'
         - 'twrp-12.1'
-      DEVICE_NAME:
-        description: 'Device Name'
-        required: true
-        default: 'Samsung Galaxy A13'
       DEVICE_TREE_URL:
         description: 'Device Tree URL'
         required: true
@@ -58,7 +46,7 @@ on:
         required: true
         default: 'samsung'
       DEVICE_CODE:
-        description: 'Device Code'
+        description: 'Brand/Device Code'
         required: true
         default: 'a13x'
       MAKEFILE_TYPE:
@@ -131,12 +119,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: Custom Recovery for ${{ inputs.DEVICE_NAME }}
+          name: Custom Recovery for ${{ inputs.DEVICE_CODE }}
           tag_name: ${{ github.run_id }}
           body: |
-            Device: ${{ inputs.DEVICE_NAME }}
-            Type: ${{ inputs.RECOVERY }}
+            Device: ${{ inputs.DEVICE_CODE }}
+            Type: TeamWin Recovery Project (TWRP)
             Manifest: ${{ inputs.MANIFEST_BRANCH }}
             Target: ${{ inputs.BUILD_TARGET }}
-            File: ${{ inputs.BUILD_TARGET }}.img
           files: twrp/out/target/product/${{ inputs.DEVICE_CODE }}/${{ inputs.BUILD_TARGET }}.img
