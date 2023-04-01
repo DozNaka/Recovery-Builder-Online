@@ -2,7 +2,7 @@ name: TWRP Builder
 on:
   workflow_dispatch:
     inputs:
-      RECOVERY:
+      CUSTOM_RECOVERY:
         description: 'Recovery Type'
         required: true
         default: 'TWRP'
@@ -135,7 +135,7 @@ jobs:
           tag_name: ${{ github.run_id }}
           body: |
             Device: ${{ inputs.DEVICE_NAME }}
-            Type: ${{ inputs.RECOVERY }}
+            Type: ${{ inputs.CUSTOM_RECOVERY }}
             Manifest: ${{ inputs.MANIFEST_BRANCH }}
             Target: ${{ inputs.BUILD_TARGET }}
             File: ${{ inputs.BUILD_TARGET }}.img
