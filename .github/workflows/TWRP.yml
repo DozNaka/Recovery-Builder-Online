@@ -5,11 +5,11 @@ on:
       CUSTOM_RECOVERY:
         description: 'Recovery Type'
         required: true
-        default: 'TWRP'
+        default: 'TeamWin Recovery Project'
         type: choice
-        opitions:
-          - 'TWRP'
-          - 'OFRP'
+        options:
+          - 'TeamWin Recovery Project'
+          - 'OrangeFox Recovery Project'
       GH_USERNAME:
         description: 'GitHub Username'
         required: true
