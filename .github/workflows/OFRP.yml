@@ -56,8 +56,7 @@ jobs:
       - name: Prepare the build environment
         run: |
           wget -qO - https://github.com/VThang51/Recovery-Builder-Online/raw/main/sh/sudo.sh | bash
-          mkdir ofrp
-          cd ofrp
+          cd ~
           git clone https://gitlab.com/OrangeFox/misc/scripts
           cd scripts
           sudo bash setup/android_build_env.sh
@@ -66,21 +65,21 @@ jobs:
         
       - name: Sync OrangeFox sources and minimal manifest
         run: |
-          cd ofrp
-          mkdir OrangeFox_sync
-          cd OrangeFox_sync
+          mkdir ~/OrangeFox_sync
+          cd ~/OrangeFox_sync
           git clone https://gitlab.com/OrangeFox/sync.git
-          cd sync
+          cd ~/OrangeFox_sync/sync/
           ./orangefox_sync.sh --branch ${{ inputs.BRANCH }} --path ~/fox_${{ inputs.BRANCH }}
 
       - name: Place device trees and kernel
         run: |
-          cd ofrp/fox_${{ inputs.BRANCH }}
+          cd ~/fox_${{ inputs.BRANCH }}
           git clone -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_TREE_URL }} ${{ inputs.DEVICE_PATH }}
           
       - name: Build it
         run: |
-          cd ofrp/OrangeFox
+          cd ~/OrangeFox
+          chmod 777 build/envsetup.sh
           source build/envsetup.sh
           export ALLOW_MISSING_DEPENDENCIES=true
           export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
@@ -100,4 +99,4 @@ jobs:
             Manifest: ${{ inputs.BRANCH }}
             Device: ${{ inputs.DEVICE_NAME }}
             Target: ${{ inputs.BUILD_TARGET }}.img
-          files: out/target/product/${{ inputs.DEVICE_NAME }}/OrangeFox-unofficial-${{ inputs.DEVICE_NAME }}.img
+          files: ofrp/out/target/product/${{ inputs.DEVICE_NAME }}/OrangeFox-unofficial-${{ inputs.DEVICE_NAME }}.img
