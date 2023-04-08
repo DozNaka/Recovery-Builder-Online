@@ -34,6 +34,9 @@ on:
         options:
           - 'omni'
           - 'twrp'
+      ADD_EXPORT:
+        description: 'Add "export"'
+        required: false
       BUILD_TARGET:
         description: 'Build Target'
         required: true
@@ -85,7 +88,7 @@ jobs:
           export ALLOW_MISSING_DEPENDENCIES=true
           export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
           export LC_ALL="C"
-          ${{ inputs.ADD_SCRIPT }}
+          ${{ inputs.ADD_EXPORT }}
           lunch ${{ inputs.MAKEFILE_TYPE }}_${{ inputs.DEVICE_CODE }}-eng
           mka ${{ inputs.BUILD_TARGET }}image
 
