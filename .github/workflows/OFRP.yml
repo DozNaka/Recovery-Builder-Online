@@ -1,4 +1,4 @@
-name: OFRP Builder
+name: OrangeFox-RP Builder
 on:
   workflow_dispatch:
     inputs:
