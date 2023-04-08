@@ -50,7 +50,7 @@ on:
           - 'omni'
           - 'twrp'
       ADD_EXPORT:
-        description: 'Add 'export''
+        description: 'Add "export"'
         required: false
       BUILD_TARGET:
         description: 'Build Target'
