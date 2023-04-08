@@ -46,7 +46,7 @@ on:
         required: true
         default: 'samsung'
       DEVICE_CODE:
-        description: 'Brand/Device Code'
+        description: 'Device Code'
         required: true
         default: 'a13x'
       MAKEFILE_TYPE:
@@ -72,28 +72,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
-      - name: Cleanup
+      - name: Cleanup and Install the necessary packages
+        uses: rokibhasansagar/slimhub_action@main
         run: |
-          curl -LO https://github.com/VThang51/Recovery-Builder-Online/raw/main/General/Cleanup.sh | bash
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf /opt/ghc
-          sudo rm -rf "/usr/local/share/boost"
-          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
-
-      - name: Prepare the environment
-        run: |
-          sudo apt-get -y update
-          sudo apt-get -y upgrade
-          sudo apt-get -y install bc build-essential zip curl libstdc++6 git wget python python2 gcc clang libssl-dev rsync flex curl bison aria2
-          mkdir ~/bin
-          curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
-          chmod a+x ~/bin/repo
-          sudo ln -sf ~/bin/repo /usr/bin/repo
+          
 
       - name: Repo Sync
         run: |
-          mkdir ~/twrp
-          cd ~/twrp
+          mkdir twrp
+          cd twrp
           git config --global user.name "${{ inputs.GH_USERNAME }}"
           git config --global user.email "${{ inputs.GH_EMAIL }}"
           repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_${{ inputs.MANIFEST_TYPE }}.git -b ${{ inputs.MANIFEST_BRANCH }}
@@ -102,12 +89,10 @@ jobs:
       
       - name: Clone device tree
         run: |
-          cd ~/twrp
           git clone -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_TREE_URL }} device/${{ inputs.BRAND }}/${{ inputs.DEVICE_CODE }}
 
       - name: Building recovery
         run: |
-          cd ~/twrp
           chmod 777 build/envsetup.sh
           ./build/envsetup.sh
           export ALLOW_MISSING_DEPENDENCIES=true
