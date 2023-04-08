@@ -1,7 +1,7 @@
 # How to build Custom Recovery
 - DON'T FORGET TO READ THE NOTES
 ## TeamWin Recovery Project
-### According to the image, we have 9 lines that need to be filled in and edited
+- According to the image, we have 9 lines that need to be filled in and edited
 ```bash
 - Manifest Type
 - Manifest Branch
