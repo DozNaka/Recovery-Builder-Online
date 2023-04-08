@@ -48,7 +48,7 @@ on:
           - 'boot'
           - 'adbd boot'
 jobs:
-  OrangeFox Recovery Project:
+  OrangeFox-Recovery-Project:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
@@ -104,3 +104,4 @@ jobs:
             Type: OrangeFox Recovery Project (OFRP)
             Target: ${{ inputs.BUILD_TARGET }}
           files: ~/fox_${{ inputs.BRANCH }}/out/target/product/${{ inputs.DEVICE_NAME }}/OrangeFox-unofficial-${{ inputs.DEVICE_NAME }}.img
+  TeamWin-Recovery-Project:
