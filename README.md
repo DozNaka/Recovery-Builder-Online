@@ -24,7 +24,8 @@
 -- twrp-4.4-deprecated
 -- ...
 -- twrp-9.0
-
+```
+```bash
 - aosp
 -- twrp-11
 -- twrp-12.1
