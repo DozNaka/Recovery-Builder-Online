@@ -107,4 +107,4 @@ jobs:
             Device: ${{ inputs.DEVICE_CODE }}
             Type: TeamWin Recovery Project (TWRP)
             Target: ${{ inputs.BUILD_TARGET }}
-          files: twrp/out/target/product/${{ inputs.DEVICE_CODE }}/${{ inputs.BUILD_TARGET }}.img
+          files: ~/twrp/out/target/product/${{ inputs.DEVICE_CODE }}/${{ inputs.BUILD_TARGET }}.img
