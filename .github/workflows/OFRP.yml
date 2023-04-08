@@ -30,14 +30,9 @@ on:
         description: 'Makefile Name'
         required: true
         default: 'twrp_a13x'
-      PARTITION:
-        description: 'Partition Device'
-        required: true
-        default: 'A-only'
-        type: choice
-        options:
-        - 'A-only'
-        - 'A/B'
+      ADD_SCRIPT:
+        description: 'Add Script'
+        required: false
       BUILD_TARGET:
         description: 'Build Target'
         required: true
@@ -45,8 +40,8 @@ on:
         type: choice
         options:
           - 'recovery'
-          - 'boot'
           - 'adbd recovery'
+          - 'boot'
           - 'adbd boot'
 jobs:
   build:
@@ -56,23 +51,13 @@ jobs:
         uses: actions/checkout@master
 
       - name: Cleanup
-        run: |
-          curl -LO https://github.com/VThang51/Recovery-Builder-Online/raw/main/General/Cleanup.sh | bash
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf /opt/ghc
-          sudo rm -rf "/usr/local/share/boost"
-          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+        uses: rokibhasansagar/slimhub_actions@main
 
       - name: Prepare the build environment
         run: |
-          sudo apt-get -y update
-          sudo apt-get -y upgrade
-          sudo apt-get -y install bc build-essential zip curl libstdc++6 git wget python python2 gcc clang libssl-dev rsync flex curl bison aria2
-          mkdir ~/bin
-          curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
-          chmod a+x ~/bin/repo
-          sudo ln -sf ~/bin/repo /usr/bin/repo
-          cd ~
+          wget -qO - https://github.com/VThang51/Recovery-Builder-Online/raw/main/sh/sudo.sh | bash
+          mkdir ofrp
+          cd ofrp
           git clone https://gitlab.com/OrangeFox/misc/scripts
           cd scripts
           sudo bash setup/android_build_env.sh
@@ -81,30 +66,26 @@ jobs:
         
       - name: Sync OrangeFox sources and minimal manifest
         run: |
-          mkdir ~/OrangeFox_sync
-          cd ~/OrangeFox_sync
+          cd ofrp
+          mkdir OrangeFox_sync
+          cd OrangeFox_sync
           git clone https://gitlab.com/OrangeFox/sync.git
-          cd ~/OrangeFox_sync/sync/
+          cd sync
           ./orangefox_sync.sh --branch ${{ inputs.BRANCH }} --path ~/fox_${{ inputs.BRANCH }}
 
       - name: Place device trees and kernel
         run: |
-          cd ~/fox_${{ inputs.BRANCH }}
+          cd ofrp/fox_${{ inputs.BRANCH }}
           git clone -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_TREE_URL }} ${{ inputs.DEVICE_PATH }}
           
       - name: Build it
         run: |
-          cd ~/OrangeFox
+          cd ofrp/OrangeFox
           source build/envsetup.sh
-      - if: ${{ inputs.PARTITION == 'A-only' }}
-        run: |
           export ALLOW_MISSING_DEPENDENCIES=true
           export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
           export LC_ALL="C"
-      - if: ${{ inputs.PARTITION == 'A/B' }}
-        run: |
-          export OF_AB_DEVICE=1
-          export OF_USE_MAGISKBOOT_FOR_ALL_PATCHES=1
+          ${{ inputs.ADD_SCRIPT }}
           lunch ${{ inputs.MAKEFILE_NAME }}-eng
           mka ${{ inputs.BUILD_TARGET }}image
 
