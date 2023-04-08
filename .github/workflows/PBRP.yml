@@ -1,0 +1,95 @@
+name: PBRP Builder
+on:
+  workflow_dispatch:
+    inputs:
+      BRANCH:
+        description: 'Branch'
+        required: true
+        default: 'android-12.1'
+        type: choice
+        options:
+        - 'twrp-6.0'
+        - 'android-6.0'
+        - 'twrp-7.1'
+        - 'android-7.1'
+        - 'twrp-8.1'
+        - 'android-8.1'
+        - 'android-9.0'
+        - 'android-10.0'
+        - 'android-11.0'
+        - 'android-12.1'
+      DEVICE_TREE_URL:
+        description: 'Device Tree URL'
+        required: true
+        default: 'https://github.com/VThang51/android_device_samsung_a13'
+      DEVICE_TREE_BRANCH:
+        description: 'Device Tree Branch'
+        required: true
+        default: 'master'
+      BRAND:
+        description: 'Brand'
+        required: true
+        default: 'samsung'
+      DEVICE_CODE:
+        description: 'Device Code'
+        required: true
+        default: 'a13x'
+      MAKEFILE_TYPE:
+        description: 'Makefile Type'
+        required: true
+        default: 'twrp'
+        type: choice
+        options:
+          - 'omni'
+          - 'twrp'
+      ADD_EXPORT:
+        description: 'Add "export"'
+        required: false
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Cleanup
+        uses: rokibhasansagar/slimhub_actions@main
+
+      - name: Install the necessary packages
+        run: |
+          wget -qO - https://github.com/VThang51/Recovery-Builder-Online/raw/main/sh/sudo.sh | bash
+      - name: Repo Sync
+        run: |
+          mkdir ~/pbrp
+          cd ~/pbrp
+          git config --global user.name "VThang51"
+          git config --global user.email "vietthang0511.2@gmail.com"
+          repo init --depth=1 -u git://github.com/PitchBlackRecoveryProject/manifest_pb.git -b ${{ inputs.BRANCH }}
+          repo sync
+          rm -rf .rep
+      
+      - name: Clone device tree
+        run: |
+          cd ~/pbrp
+          git clone -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_TREE_URL }} device/${{ inputs.BRAND }}/${{ inputs.DEVICE_CODE }}
+      - name: Building recovery
+        run: |
+          cd ~/pbrp
+          chmod 777 build/envsetup.sh
+          export ALLOW_MISSING_DEPENDENCIES=true
+          ${{ inputs.ADD_EXPORT }}
+          . build/envsetup.sh
+          lunch ${{ inputs.MAKEFILE_TYPE }}_${{ inputs.DEVICE_CODE }}-eng
+          mka recoveryimage
+      - name: Upload to Release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          name: Custom Recovery for ${{ inputs.DEVICE_CODE }}
+          tag_name: ${{ inputs.MANIFEST_BRANCH }}
+          body: |
+            Device: ${{ inputs.DEVICE_CODE }}
+            Type: PitchBlack Recovery Project (PBRP)
+            Target: ${{ inputs.BUILD_TARGET }}
+          files: pbrp/out/target/product/${{ inputs.DEVICE_CODE }}/recovery.img
