@@ -72,11 +72,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
-      - name: Cleanup and Install the necessary packages
+      - name: Cleanup
         uses: rokibhasansagar/slimhub_action@main
-        run: |
-          
 
+      - name: Install the necessary packages
+        run: |
+          wget -qO - https://raw.githubusercontent.com/VThang51/Recovery-Builder-Online/main/sh/sudo.sh | bash
       - name: Repo Sync
         run: |
           mkdir twrp
