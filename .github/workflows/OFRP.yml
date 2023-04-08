@@ -69,20 +69,20 @@ jobs:
         
       - name: Sync OrangeFox sources and minimal manifest
         run: |
-          mkdir ~/ofrp_sync
-          cd ~/ofrp_sync
+          mkdir ~/OrangeFox_sync
+          cd ~/OrangeFox_sync
           git clone https://gitlab.com/OrangeFox/sync.git
-          cd ~/ofrp_sync/sync
-          ./orangefox_sync.sh --branch ${{ inputs.BRANCH }} --path ~/ofrp
+          cd ~/OrangeFox_sync/sync/
+          ./orangefox_sync.sh --branch ${{ inputs.BRANCH }} --path ~/fox_${{ inputs.BRANCH }}
 
-      - name: Place device trees and kernel
+      - name: Clone Device Tree
         run: |
-          cd ~/ofrp
+          cd ~/fox_${{ inputs.BRANCH }}
           git clone -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_TREE_URL }} device/${{ inputs.BRAND }}/${{ inputs.DEVICE_CODE }}
           
       - name: Build it
         run: |
-          cd ~/ofrp
+          cd ~/fox_${{ inputs.BRANCH }}
           chmod 777 build/envsetup.sh
           source build/envsetup.sh
           export ALLOW_MISSING_DEPENDENCIES=true
