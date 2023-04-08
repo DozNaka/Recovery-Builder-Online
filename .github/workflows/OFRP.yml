@@ -66,10 +66,10 @@ jobs:
         
       - name: Sync OrangeFox sources and minimal manifest
         run: |
-          mkdir ~/ofrp
-          cd ~/ofrp
+          mkdir ~/ofrp_sync
+          cd ~/ofrp_sync
           git clone https://gitlab.com/OrangeFox/sync.git
-          cd ~/ofrp/sync
+          cd ~/ofrp_sync/sync
           ./orangefox_sync.sh --branch ${{ inputs.BRANCH }} --path ~/ofrp
 
       - name: Place device trees and kernel
