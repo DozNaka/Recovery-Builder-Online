@@ -97,6 +97,7 @@ jobs:
       - name: Building recovery
         run: |
           cd twrp
+          chmod 777 build/envsetup.sh
           ./build/envsetup.sh
           export ALLOW_MISSING_DEPENDENCIES=true
           lunch ${{ inputs.MAKEFILE_TYPE }}_${{ inputs.DEVICE_CODE }}-eng
