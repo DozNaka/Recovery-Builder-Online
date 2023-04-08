@@ -34,7 +34,7 @@ on:
         options:
           - 'omni'
           - 'twrp'
-        BUILD_TARGET:
+      BUILD_TARGET:
         description: 'Build Target'
         required: true
         default: 'recovery'
