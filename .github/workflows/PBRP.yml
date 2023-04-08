@@ -1,4 +1,4 @@
-name: PBRP Builder
+name: PitchBlack-RP Builder
 on:
   workflow_dispatch:
     inputs:
