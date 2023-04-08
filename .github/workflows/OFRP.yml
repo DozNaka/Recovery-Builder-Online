@@ -103,4 +103,4 @@ jobs:
             Device: ${{ inputs.DEVICE_CODE }}
             Type: OrangeFox Recovery Project (OFRP)
             Target: ${{ inputs.BUILD_TARGET }}
-          files: ~/ofrp/out/target/product/${{ inputs.DEVICE_NAME }}/OrangeFox-unofficial-${{ inputs.DEVICE_NAME }}.img
+          files: ~/fox_${{ inputs.BRANCH }}/out/target/product/${{ inputs.DEVICE_NAME }}/OrangeFox-unofficial-${{ inputs.DEVICE_NAME }}.img
