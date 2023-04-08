@@ -98,8 +98,8 @@ jobs:
         run: |
           cd twrp
           chmod 777 build/envsetup.sh
-          ./build/envsetup.sh
           export ALLOW_MISSING_DEPENDENCIES=true
+          . build/envsetup.sh
           lunch ${{ inputs.MAKEFILE_TYPE }}_${{ inputs.DEVICE_CODE }}-eng
           mka ${{ inputs.BUILD_TARGET }}image
 
