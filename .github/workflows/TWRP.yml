@@ -50,7 +50,7 @@ on:
           - 'omni'
           - 'twrp'
       ADD_EXPORT:
-        description: 'Add "export"'
+        description: 'Add 'export''
         required: false
       BUILD_TARGET:
         description: 'Build Target'
@@ -75,21 +75,21 @@ jobs:
           wget -qO - https://github.com/VThang51/Recovery-Builder-Online/raw/main/sh/sudo.sh | bash
       - name: Repo Sync
         run: |
-          mkdir twrp
-          cd twrp
+          mkdir ~/twrp
+          cd ~/twrp
           git config --global user.name "VThang51"
           git config --global user.email "vietthang0511.2@gmail.com"
-          repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_${{ inputs.MANIFEST_TYPE }}.git -b ${{ inputs.MANIFEST_BRANCH }}
+          repo init -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_${{ inputs.MANIFEST_TYPE }}.git -b ${{ inputs.MANIFEST_BRANCH }}
           repo sync -c -j4 --force-sync --no-clone-bundle --no-tags
           rm -rf .rep
       
       - name: Clone device tree
         run: |
-          cd twrp
+          cd ~/twrp
           git clone -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_TREE_URL }} device/${{ inputs.BRAND }}/${{ inputs.DEVICE_CODE }}
       - name: Building recovery
         run: |
-          cd twrp
+          cd ~/twrp
           chmod 777 build/envsetup.sh
           export ALLOW_MISSING_DEPENDENCIES=true
           ${{ inputs.ADD_EXPORT }}
