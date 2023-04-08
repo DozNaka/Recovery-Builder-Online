@@ -93,7 +93,7 @@ jobs:
           chmod 777 build/envsetup.sh
           export ALLOW_MISSING_DEPENDENCIES=true
           ${{ inputs.ADD_EXPORT }}
-          source build/envsetup.sh
+          . build/envsetup.sh
           lunch ${{ inputs.MAKEFILE_TYPE }}_${{ inputs.DEVICE_CODE }}-eng
           mka ${{ inputs.BUILD_TARGET }}image
       - name: Upload to Release
