@@ -2,14 +2,6 @@ name: TWRP Builder
 on:
   workflow_dispatch:
     inputs:
-      GH_USERNAME:
-        description: 'GitHub Username'
-        required: true
-        default: 'VThang51'
-      GH_EMAIL:
-        description: 'GitHub Email'
-        required: true
-        default: 'vietthang0511.2@gmail.com'
       MANIFEST_TYPE:
         description: 'Manifest Type'
         required: true
@@ -57,6 +49,9 @@ on:
         options:
           - 'omni'
           - 'twrp'
+      ADD_EXPORT:
+        description: 'Add 'export''
+        required: false
       BUILD_TARGET:
         description: 'Build Target'
         required: true
@@ -78,13 +73,12 @@ jobs:
       - name: Install the necessary packages
         run: |
           wget -qO - https://github.com/VThang51/Recovery-Builder-Online/raw/main/sh/sudo.sh | bash
-
       - name: Repo Sync
         run: |
           mkdir twrp
           cd twrp
-          git config --global user.name "${{ inputs.GH_USERNAME }}"
-          git config --global user.email "${{ inputs.GH_EMAIL }}"
+          git config --global user.name "VThang51"
+          git config --global user.email "vietthang0511.2@gmail.com"
           repo init -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_${{ inputs.MANIFEST_TYPE }}.git -b ${{ inputs.MANIFEST_BRANCH }}
           repo sync -c -j4 --force-sync --no-clone-bundle --no-tags
           rm -rf .rep
@@ -93,16 +87,15 @@ jobs:
         run: |
           cd twrp
           git clone -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_TREE_URL }} device/${{ inputs.BRAND }}/${{ inputs.DEVICE_CODE }}
-
       - name: Building recovery
         run: |
           cd twrp
           chmod 777 build/envsetup.sh
           export ALLOW_MISSING_DEPENDENCIES=true
+          ${{ inputs.ADD_EXPORT }}
           source build/envsetup.sh
           lunch ${{ inputs.MAKEFILE_TYPE }}_${{ inputs.DEVICE_CODE }}-eng
           mka ${{ inputs.BUILD_TARGET }}image
-
       - name: Upload to Release
         uses: softprops/action-gh-release@v1
         env:
