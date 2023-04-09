@@ -10,16 +10,16 @@ on:
         options:
           - 'omni': "Omni"
           - 'aosp': "AOSP"
-          - 'lineageos': LineageOS
+          - 'lineageos': "LineageOS"
       MANIFEST_BRANCH:
         description: 'Manifest Branch'
         required: true
         default: 'twrp-12.1'
         type: choice
         options:
-          - 'twrp-4.4-deprecated': "ja"
-          - 'twrp-5.1': "ks"
-          - 'twrp-6.0': "jwj"
+          - 'twrp-4.4-deprecated'
+          - 'twrp-5.1'
+          - 'twrp-6.0'
           - 'twrp-7.1'
           - 'twrp-8.1'
           - 'twrp-9.0'
@@ -60,9 +60,9 @@ on:
         default: 'recovery'
         type: choice
         options:
-          - 'recovery': "psj"
-          - 'boot': "ha"
-          - 'vendorboot': "jwjw"
+          - 'recovery': "Recovery Partiton"
+          - 'boot': "Boot Image Ramdisk"
+          - 'vendorboot': "Vendor-Boot Image Ramdisk"
 jobs:
   TeamWin-Recovery-Project:
     runs-on: ubuntu-20.04
