@@ -28,7 +28,7 @@ on:
           value: 'twrp-6.0'
           - name: "Android 7.1 (Omni)"
           value: 'twrp-7.1'
-          - name: 'Android 8.1 (Omni)"
+          - name: "Android 8.1 (Omni)"
           value: 'twrp-8.1'
           - name: "Android 9.0 (Omni)"
           value: 'twrp-9.0'
