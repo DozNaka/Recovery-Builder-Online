@@ -8,7 +8,7 @@ on:
         default: 'aosp'
         type: choice
         options:
-          - 'omni': "Omni"
+          - "oMni": 'omni'
           - 'aosp': "AOSP"
           - 'lineageos': "LineageOS"
       MANIFEST_BRANCH:
