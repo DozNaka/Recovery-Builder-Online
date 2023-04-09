@@ -8,7 +8,8 @@ on:
         default: 'android-12.1'
         type: choice
         options:
-        - 'twrp-6.0'
+        - value: 'twrp-6.0'
+        label: "Android 6.0"
         - 'android-6.0'
         - 'twrp-7.1'
         - 'android-7.1'
