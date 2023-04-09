@@ -8,11 +8,11 @@ on:
         default: 'AOSP'
         type: choice
         options:
-        - 'Omni'
+        - name: 'Omni'
         value: omni
-        - 'AOSP'
+        - name: 'AOSP'
         value: aosp
-        - 'LineageOS'
+        - name: 'LineageOS'
         value: lineageos
       MANIFEST_BRANCH:
         description: 'Manifest Branch'
@@ -20,25 +20,25 @@ on:
         default: 'Android 12.1 (AOSP)'
         type: choice
         options:
-        - 'Android 4.4 (Deprecated-Omni)'
+        - name: 'Android 4.4 (Deprecated-Omni)'
         value: twrp-4.4-deprecated
-        - 'Android 5.1 (Omni)'
+        - name: 'Android 5.1 (Omni)'
         value: twrp-5.1
-        - 'Android 6.0 (Omni)'
+        - name: 'Android 6.0 (Omni)'
         value: twrp-6.0
-        - 'Android 7.1 (Omni)'
+        - name: 'Android 7.1 (Omni)'
         value: twrp-7.1
-        - 'Android 8.1 (Omni)'
+        - name: 'Android 8.1 (Omni)'
         value: twrp-8.1
-        - 'Android 9.0 (Omni)'
+        - name: 'Android 9.0 (Omni)'
         value: twrp-9.0
-        - 'Android 10.0 (Deprecated-Omni)'
-        value: twrp-10.0-deprecated
-        - 'Android 11 (AOSP)'
+        - name: 'Android 10.0 (Deprecated-Omni)'
+        value: 'twrp-10.0-deprecated'
+        - name: 'Android 11 (AOSP)'
         value: twrp-11
-        - 'Android 12.1 (AOSP)'
+        - name: 'Android 12.1 (AOSP)'
         value: twrp-12.1
-        - 'LineageOS 14.1'
+        - name: 'LineageOS 14.1'
         value: twrp-14.1
       DEVICE_TREE_URL:
         description: 'Device Tree URL'
@@ -73,11 +73,11 @@ on:
         default: 'Recovery Partition'
         type: choice
         options:
-          - 'Recovery Partition'
+          - name: 'Recovery Partition'
           value: recovery
-          - 'Boot Image Ramdisk'
+          - name: 'Boot Image Ramdisk'
           value: boot
-          - 'Vendor-Boot Image Ramdisk'
+          - name: 'Vendor-Boot Image Ramdisk'
           value: vendorboot
 jobs:
   TeamWin-Recovery-Project:
