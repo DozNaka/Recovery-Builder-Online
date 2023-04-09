@@ -58,7 +58,7 @@ Samsung
 Oppo
 Realme
 ```
-#### Device Code
+#### Device Code/Makefile Type
 
 - You can view it from the name of the .mk file
 
