@@ -71,8 +71,8 @@ jobs:
         uses: rokibhasansagar/slimhub_actions@main
 
       - name: Install the necessary packages
-        run: |
-          wget -qO - https://github.com/VThang51/Recovery-Builder-Online/raw/main/sh/sudo.sh | bash
+        run: bash sh/sudo.sh
+
       - name: Repo Sync
         run: |
           mkdir ~/twrp
