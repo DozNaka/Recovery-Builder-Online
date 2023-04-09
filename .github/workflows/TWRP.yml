@@ -8,38 +8,38 @@ on:
         default: 'AOSP'
         type: choice
         options:
-        - name: 'Omni'
-        value: omni
-        - name: 'AOSP'
-        value: aosp
-        - name: 'LineageOS'
-        value: lineageos
+          - name: 'Omni'
+          value: omni
+          - name: 'AOSP'
+          value: aosp
+          - name: 'LineageOS'
+          value: lineageos
       MANIFEST_BRANCH:
         description: 'Manifest Branch'
         required: true
         default: 'Android 12.1 (AOSP)'
         type: choice
         options:
-        - name: 'Android 4.4 (Deprecated-Omni)'
-        value: twrp-4.4-deprecated
-        - name: 'Android 5.1 (Omni)'
-        value: twrp-5.1
-        - name: 'Android 6.0 (Omni)'
-        value: twrp-6.0
-        - name: 'Android 7.1 (Omni)'
-        value: twrp-7.1
-        - name: 'Android 8.1 (Omni)'
-        value: twrp-8.1
-        - name: 'Android 9.0 (Omni)'
-        value: twrp-9.0
-        - name: 'Android 10.0 (Deprecated-Omni)'
-        value: 'twrp-10.0-deprecated'
-        - name: 'Android 11 (AOSP)'
-        value: twrp-11
-        - name: 'Android 12.1 (AOSP)'
-        value: twrp-12.1
-        - name: 'LineageOS 14.1'
-        value: twrp-14.1
+          - name: 'Android 4.4 (Deprecated-Omni)'
+          value: twrp-4.4-deprecated
+          - name: 'Android 5.1 (Omni)'
+          value: twrp-5.1
+          - name: 'Android 6.0 (Omni)'
+          value: twrp-6.0
+          - name: 'Android 7.1 (Omni)'
+          value: twrp-7.1
+          - name: 'Android 8.1 (Omni)'
+          value: twrp-8.1
+          - name: 'Android 9.0 (Omni)'
+          value: twrp-9.0
+          - name: 'Android 10.0 (Deprecated-Omni)'
+          value: 'twrp-10.0-deprecated'
+          - name: 'Android 11 (AOSP)'
+          value: twrp-11
+          - name: 'Android 12.1 (AOSP)'
+          value: twrp-12.1
+          - name: 'LineageOS 14.1'
+          value: twrp-14.1
       DEVICE_TREE_URL:
         description: 'Device Tree URL'
         required: true
