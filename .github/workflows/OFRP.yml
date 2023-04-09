@@ -8,8 +8,9 @@ on:
         default: '12.1'
         type: choice
         options:
-        - '11.0'
-        - '12.1'
+          - value: '11.0'
+          label: "Android"
+          - '12.1'
       DEVICE_TREE_URL:
         description: 'Device Tree URL'
         required: true
