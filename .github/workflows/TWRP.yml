@@ -1,4 +1,4 @@
-name: TWRP Builder
+name: TeamWin-RP Builder
 on:
   workflow_dispatch:
     inputs:
