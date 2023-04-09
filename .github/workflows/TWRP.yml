@@ -7,39 +7,26 @@ on:
         required: true
         default: 'aosp'
         type: choice
-        Ksksj:
-          - name: "Omni"
-          value: 'omni'
-          - name: "AOSP"
-          value: 'aosp'
-          - name: "LineageOS"
-          value: 'lineageos'
+        options:
+          - 'omni': Omni
+          - 'aosp': AOSP
+          - 'lineageos': LineageOS
       MANIFEST_BRANCH:
         description: 'Manifest Branch'
         required: true
         default: 'twrp-12.1'
         type: choice
         options:
-          - name: "Android 4.4 (Deprecated-Omni)"
-          value: 'twrp-4.4-deprecated'
-          - name: "Android 5.1 (Omni)"
-          value: 'twrp-5.1'
-          - name: "Android 6.0 (Omni)"
-          value: 'twrp-6.0'
-          - name: "Android 7.1 (Omni)"
-          value: 'twrp-7.1'
-          - name: "Android 8.1 (Omni)"
-          value: 'twrp-8.1'
-          - name: "Android 9.0 (Omni)"
-          value: 'twrp-9.0'
-          - name: "Android 10.0 (Deprecated-Omni)"
-          value: 'twrp-10.0-deprecated'
-          - name: "Android 11 (AOSP)"
-          value: 'twrp-11'
-          - name: "Android 12.1 (AOSP)"
-          value: 'twrp-12.1'
-          - name: "LineageOS 14.1"
-          value: 'twrp-14.1'
+          - 'twrp-4.4-deprecated': ja
+          - 'twrp-5.1': ks
+          - 'twrp-6.0': jwj
+          - 'twrp-7.1'
+          - 'twrp-8.1'
+          - 'twrp-9.0'
+          - 'twrp-10.0-deprecated'
+          - 'twrp-11'
+          - 'twrp-12.1'
+          - 'twrp-14.1'
       DEVICE_TREE_URL:
         description: 'Device Tree URL'
         required: true
@@ -73,12 +60,9 @@ on:
         default: 'recovery'
         type: choice
         options:
-          - name: "Recovery Partition"
-          value: 'recovery'
-          - name: "Boot Image Ramdisk"
-          value: 'boot'
-          - name: "Vendor-Boot Image Ramdisk"
-          value: 'vendorboot'
+          - 'recovery': psj
+          - 'boot': ha
+          - 'vendorboot': jwjw
 jobs:
   TeamWin-Recovery-Project:
     runs-on: ubuntu-20.04
