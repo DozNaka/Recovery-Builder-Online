@@ -1,30 +1,45 @@
-name: TeamWin-RP Builder
+name: TWRP Builder
 on:
   workflow_dispatch:
     inputs:
       MANIFEST_TYPE:
         description: 'Manifest Type'
         required: true
-        default: 'aosp'
+        default: 'AOSP'
         type: choice
         options:
-        - 'omni'
-        - 'aosp'
+        - 'Omni'
+        value: omni
+        - 'AOSP'
+        value: aosp
+        - 'LineageOS'
+        value: lineageos
       MANIFEST_BRANCH:
         description: 'Manifest Branch'
         required: true
-        default: 'twrp-12.1'
+        default: 'Android 12.1 (AOSP)'
         type: choice
         options:
-        - 'twrp-4.4-deprecated'
-        - 'twrp-5.1'
-        - 'twrp-6.0'
-        - 'twrp-7.1'
-        - 'twrp-8.1'
-        - 'twrp-9.0'
-        - 'twrp-10.0-deprecated'
-        - 'twrp-11'
-        - 'twrp-12.1'
+        - 'Android 4.4 (Deprecated-Omni)'
+        value: twrp-4.4-deprecated
+        - 'Android 5.1 (Omni)'
+        value: twrp-5.1
+        - 'Android 6.0 (Omni)'
+        value: twrp-6.0
+        - 'Android 7.1 (Omni)'
+        value: twrp-7.1
+        - 'Android 8.1 (Omni)'
+        value: twrp-8.1
+        - 'Android 9.0 (Omni)'
+        value: twrp-9.0
+        - 'Android 10.0 (Deprecated-Omni)'
+        value: twrp-10.0-deprecated
+        - 'Android 11 (AOSP)'
+        value: twrp-11
+        - 'Android 12.1 (AOSP)'
+        value: twrp-12.1
+        - 'LineageOS 14.1'
+        value: twrp-14.1
       DEVICE_TREE_URL:
         description: 'Device Tree URL'
         required: true
@@ -55,25 +70,29 @@ on:
       BUILD_TARGET:
         description: 'Build Target'
         required: true
-        default: 'recovery'
+        default: 'Recovery Partition'
         type: choice
         options:
-          - 'recovery'
-          - 'boot'
+          - 'Recovery Partition'
+          value: recovery
+          - 'Boot Image Ramdisk'
+          value: boot
+          - 'Vendor-Boot Image Ramdisk'
+          value: vendorboot
 jobs:
-  build:
+  TeamWin-Recovery-Project:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
         uses: actions/checkout@master
 
-      - name: Cleanup
+      - name: Free up space
         uses: rokibhasansagar/slimhub_actions@main
 
-      - name: Install the necessary packages
+      - name: Remove and Install the necessary Packages
         run: bash sh/sudo.sh
 
-      - name: Repo Sync
+      - name: Sync Source and Minimal Manifest
         run: |
           mkdir ~/twrp
           cd ~/twrp
@@ -83,11 +102,12 @@ jobs:
           repo sync -c -j4 --force-sync --no-clone-bundle --no-tags
           rm -rf .rep
       
-      - name: Clone device tree
+      - name: Clone Device Tree
         run: |
           cd ~/twrp
           git clone -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_TREE_URL }} device/${{ inputs.BRAND }}/${{ inputs.DEVICE_CODE }}
-      - name: Building recovery
+
+      - name: Compile Custom Recovery 
         run: |
           cd ~/twrp
           chmod 777 build/envsetup.sh
@@ -107,4 +127,4 @@ jobs:
             Device: ${{ inputs.DEVICE_CODE }}
             Type: TeamWin Recovery Project (TWRP)
             Target: ${{ inputs.BUILD_TARGET }}
-          files: ~/twrp/out/target/product/${{ inputs.DEVICE_CODE }}/${{ inputs.BUILD_TARGET }}.img
+          files: twrp/out/target/product/${{ inputs.DEVICE_CODE }}/${{ inputs.BUILD_TARGET }}.img
