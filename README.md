@@ -1,5 +1,12 @@
 # How to build Custom Recovery
 | Supported Custom Recovery versions |
+| ------------------------------------------- |
+| Custom Recovery | Shorthand | Status | Note |
+| :-------------- | :-------: | :----- | :--- |
+| TeamWin Recovery Project | `TWRP` | Fixing bugs |  |
+| OrangeFox Recovery Project | `OFRP` | Fixing bugs |  |
+| PitchBlack Recovery Project | `PBRP` |  | Coming soon |
+| SkyHawk Recovery Project | `SHRP` |  | Coming soon |
 | Custom Recovery | Shorthand | Status | Note |
 | :-------------- | :-------: | :----- | :--- |
 | TeamWin Recovery Project | `TWRP` | Fixing bugs |  |
