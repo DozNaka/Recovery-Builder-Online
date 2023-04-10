@@ -2,7 +2,7 @@
 - Supported Custom Recovery versions:
 
 | Custom Recovery | File Name | Status | Note |
-| --------------: | :-------: | :----- | :--- |
+| --------------: | :-------: | :----: | :--: |
 | TeamWin Recovery Project | [TWRP.yml](https://github.com/VThang51/Recovery-Builder-Workflows/blob/main/.github/workflows/TWRP.yml) | Fixing bugs |  |
 | OrangeFox Recovery Project | [OFRP.yml](https://github.com/VThang51/Recovery-Builder-Workflows/blob/main/.github/workflows/OFRP.yml) | Fixing bugs |  |
 | PitchBlack Recovery Project | [PBRP.yml](https://github.com/VThang51/Recovery-Builder-Workflows/blob/main/.github/workflows/PBRP.yml) |  | (Coming soon) |
