@@ -64,8 +64,8 @@ jobs:
           cd ~/pbrp
           git config --global user.name "VThang51"
           git config --global user.email "vietthang0511.2@gmail.com"
-          repo init --depth=1 -u git://github.com/PitchBlackRecoveryProject/manifest_pb.git -b ${{ inputs.BRANCH }}
-          repo sync
+          repo init --depth=1 -u https://github.com/PitchBlackRecoveryProject/manifest_pb.git -b ${{ inputs.BRANCH }}
+          repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
           rm -rf .rep
       
       - name: Clone Device Tree
@@ -93,4 +93,4 @@ jobs:
             Device: ${{ inputs.DEVICE_CODE }}
             Type: PitchBlack Recovery Project (PBRP)
             Target: ${{ inputs.BUILD_TARGET }}
-          files: pbrp/out/target/product/${{ inputs.DEVICE_CODE }}/recovery.img
+          files: ~/pbrp/out/target/product/${{ inputs.DEVICE_CODE }}/recovery.img
