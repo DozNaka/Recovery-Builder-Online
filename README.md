@@ -1,12 +1,13 @@
 # How to build Custom Recovery
 - Supported Custom Recovery versions:
 
-| Custom Recovery | Shorthand | Status | Note |
-| :-------------- | :-------: | :----- | :--- |
-| TeamWin Recovery Project | `TWRP` | Fixing bugs |  |
-| OrangeFox Recovery Project | `OFRP` | Fixing bugs |  |
-| PitchBlack Recovery Project | `PBRP` |  | Coming soon |
-| SkyHawk Recovery Project | `SHRP` |  | Coming soon |
+| Custom Recovery | File Name | Status | Note |
+| --------------: | :-------: | :----- | :--- |
+| TeamWin Recovery Project | [TWRP.yml](https://github.com/VThang51/Recovery-Builder-Workflows/blob/main/.github/workflows/TWRP.yml) | Fixing bugs |  |
+| OrangeFox Recovery Project | [OFRP.yml](https://github.com/VThang51/Recovery-Builder-Workflows/blob/main/.github/workflows/OFRP.yml) | Fixing bugs |  |
+| PitchBlack Recovery Project | [PBRP.yml](https://github.com/VThang51/Recovery-Builder-Workflows/blob/main/.github/workflows/PBRP.yml) |  | (Coming soon) |
+| SkyHawk Recovery Project | [SHRP.yml](https://github.com/VThang51/Recovery-Builder-Workflows/blob/main/.github/workflows/SHRP.yml) |  | (Coming soon) |
+| Coming soon |  |  |  |
 
 - DON'T FORGET TO READ THE NOTES
 ## TeamWin Recovery Project
@@ -85,8 +86,14 @@ export XXXXXX=1 && export YYYYYY=true && export ZZZZZZ=1
 - Usually it will be "recovery", but in some cases it will be "boot"
 
 ## OrangeFox Recovery Project
-- This line will be completed when I finish the file [OFRP.yml](https://github.com/VThang51/Recovery-Builder-Online/blob/main/.github/workflows/OFRP.yml)
+- Coming soon !!!
 
-## Note
+## PitchBlack Recovery Project
+- Coming soon !!!
+
+## SKYHAWK Recovery Project
+- Coming soon !!!
+
+# Note
 - If you intend to develop this project, please clone this repository or submit a pull request.
 - Thank you!!! 
