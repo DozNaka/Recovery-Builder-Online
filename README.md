@@ -1,6 +1,6 @@
 # How to build Custom Recovery
 | Supported Custom Recovery versions |
-| -----------------------------------|
+| --------------------------------------------|
 | Custom Recovery | Shorthand | Status | Note |
 | TeamWin Recovery Project | `TWRP` | Fixing bugs |  |
 | OrangeFox Recovery Project | `OFRP` | Fixing bugs |  |
