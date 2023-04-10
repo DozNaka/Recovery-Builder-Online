@@ -7,7 +7,7 @@
 | OrangeFox Recovery Project | [Guide](https://github.com/VThang51/Recovery-Builder-Workflows/blob/main/README.md#orangefox-recovery-project) | [OFRP.yml](https://github.com/VThang51/Recovery-Builder-Workflows/blob/main/.github/workflows/OFRP.yml) | Fixing bugs |  |
 | PitchBlack Recovery Project | [Guide](https://github.com/VThang51/Recovery-Builder-Workflows/blob/main/README.md#pitchblack-recovery-project) | [PBRP.yml](https://github.com/VThang51/Recovery-Builder-Workflows/blob/main/.github/workflows/PBRP.yml) |  | (Coming soon) |
 | SkyHawk Recovery Project | [Guide](https://github.com/VThang51/Recovery-Builder-Workflows/blob/main/README.md#skyhawk-recovery-project) | [SHRP.yml](https://github.com/VThang51/Recovery-Builder-Workflows/blob/main/.github/workflows/SHRP.yml) |  | (Coming soon) |
-| Coming soon |  |  |  |  |
+| (Coming soon) |  |  |  |  |
 
 - DON'T FORGET TO READ THE NOTES
 ## TeamWin Recovery Project
