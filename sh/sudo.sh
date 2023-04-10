@@ -4,7 +4,6 @@ sudo rm -rf "/usr/local/share/boost"
 sudo rm -rf "$AGENT_TOOLSDIRECTORY"
 
 sudo apt-get -y update
-sudo apt-get -y upgrade
 
 sudo apt-get -y install bc
 sudo apt-get -y install build-essential
@@ -24,6 +23,8 @@ sudo apt-get -y install bison
 sudo apt-get -y install aria2
 sudo apt-get -y install openjdk-8-jdk
 sudo apt-get -y install make
+
+sudo apt-get -y upgrade
 
 mkdir ~/bin
 curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
