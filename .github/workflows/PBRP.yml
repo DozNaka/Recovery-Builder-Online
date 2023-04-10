@@ -8,8 +8,7 @@ on:
         default: 'android-12.1'
         type: choice
         options:
-        - value: 'twrp-6.0'
-        label: "Android 6.0"
+        - 'twrp-6.0'
         - 'android-6.0'
         - 'twrp-7.1'
         - 'android-7.1'
@@ -47,19 +46,19 @@ on:
         description: 'Add "export"'
         required: false
 jobs:
-  build:
+  PitchBlack-Recovery-Project:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
         uses: actions/checkout@master
 
-      - name: Cleanup
+      - name: Free up space
         uses: rokibhasansagar/slimhub_actions@main
 
-      - name: Install the necessary packages
-        run: |
-          wget -qO - https://github.com/VThang51/Recovery-Builder-Online/raw/main/sh/sudo.sh | bash
-      - name: Repo Sync
+      - name: Remove and Install the necessary Packages
+        run: bash sh/sudo.sh
+
+      - name: Sync Source and Minimal Manifest
         run: |
           mkdir ~/pbrp
           cd ~/pbrp
@@ -69,11 +68,12 @@ jobs:
           repo sync
           rm -rf .rep
       
-      - name: Clone device tree
+      - name: Clone Device Tree
         run: |
           cd ~/pbrp
           git clone -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_TREE_URL }} device/${{ inputs.BRAND }}/${{ inputs.DEVICE_CODE }}
-      - name: Building recovery
+      - name: Compile Custom Recovery 
+
         run: |
           cd ~/pbrp
           chmod 777 build/envsetup.sh
