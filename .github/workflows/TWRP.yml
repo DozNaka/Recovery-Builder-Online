@@ -78,6 +78,7 @@ jobs:
 
       - name: Sync Source and Minimal Manifest
         run: |
+          rm -rf ~/twrp
           mkdir ~/twrp
           cd ~/twrp
           git config --global user.name "VThang51"
