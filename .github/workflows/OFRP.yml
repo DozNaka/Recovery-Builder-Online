@@ -69,20 +69,20 @@ jobs:
         
       - name: Sync Source and Minimal Manifest
         run: |
-          mkdir ~/OrangeFox_sync
-          cd ~/OrangeFox_sync
+          mkdir ~/OrangeFox
+          cd ~/OrangeFox
           git clone https://gitlab.com/OrangeFox/sync.git
-          cd ~/OrangeFox_sync/sync/
-          ./orangefox_sync.sh --branch ${{ inputs.BRANCH }} --path ~/fox_${{ inputs.BRANCH }}
+          cd ~/OrangeFox/sync/
+          ./orangefox_sync.sh --branch ${{ inputs.BRANCH }} --path ~/OrangeFox
 
       - name: Clone Device Tree
         run: |
-          cd ~/fox_${{ inputs.BRANCH }}
+          cd ~/OrangeFox
           git clone -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_TREE_URL }} device/${{ inputs.BRAND }}/${{ inputs.DEVICE_CODE }}
           
       - name: Compile Custom Recovery 
         run: |
-          cd ~/fox_${{ inputs.BRANCH }}
+          cd ~/OrangeFox
           chmod 777 build/envsetup.sh
           source build/envsetup.sh
           export ALLOW_MISSING_DEPENDENCIES=true
