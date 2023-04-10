@@ -60,6 +60,7 @@ jobs:
 
       - name: Sync Source and Minimal Manifest
         run: |
+          rm -rf ~/pbrp
           mkdir ~/pbrp
           cd ~/pbrp
           git config --global user.name "VThang51"
