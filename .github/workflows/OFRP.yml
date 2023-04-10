@@ -8,9 +8,8 @@ on:
         default: '12.1'
         type: choice
         options:
-          - value: '11.0'
-          label: "Android"
-          - '12.1'
+        - '11.0'
+        - '12.1'
       DEVICE_TREE_URL:
         description: 'Device Tree URL'
         required: true
@@ -55,12 +54,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
-      - name: Cleanup
+      - name: Free up Space
         uses: rokibhasansagar/slimhub_actions@main
 
-      - name: Prepare the build environment
+      - name: Remove and Install the necessary Packages
         run: |
-          wget -qO - https://github.com/VThang51/Recovery-Builder-Online/raw/main/sh/sudo.sh | bash
+          bash sh/sudo.sh
           cd ~
           git clone https://gitlab.com/OrangeFox/misc/scripts
           cd scripts
@@ -68,7 +67,7 @@ jobs:
           sudo bash setup/install_android_sdk.sh
         continue-on-error: true
         
-      - name: Sync OrangeFox sources and minimal manifest
+      - name: Sync Source and Minimal Manifest
         run: |
           mkdir ~/OrangeFox_sync
           cd ~/OrangeFox_sync
@@ -81,7 +80,7 @@ jobs:
           cd ~/fox_${{ inputs.BRANCH }}
           git clone -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_TREE_URL }} device/${{ inputs.BRAND }}/${{ inputs.DEVICE_CODE }}
           
-      - name: Build it
+      - name: Compile Custom Recovery 
         run: |
           cd ~/fox_${{ inputs.BRANCH }}
           chmod 777 build/envsetup.sh
