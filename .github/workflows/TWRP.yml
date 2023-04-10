@@ -8,9 +8,9 @@ on:
         default: 'aosp'
         type: choice
         options:
-          - "oMni": 'omni'
-          - 'aosp': "AOSP"
-          - 'lineageos': "LineageOS"
+          - 'omni'
+          - 'aosp'
+          - 'lineageos'
       MANIFEST_BRANCH:
         description: 'Manifest Branch'
         required: true
@@ -60,9 +60,9 @@ on:
         default: 'recovery'
         type: choice
         options:
-          - 'recovery': "Recovery Partiton"
-          - 'boot': "Boot Image Ramdisk"
-          - 'vendorboot': "Vendor-Boot Image Ramdisk"
+          - 'recovery'
+          - 'boot'
+          - 'vendorboot'
 jobs:
   TeamWin-Recovery-Project:
     runs-on: ubuntu-20.04
