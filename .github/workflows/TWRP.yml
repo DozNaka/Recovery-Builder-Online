@@ -73,7 +73,7 @@ jobs:
       - name: Free up space
         uses: rokibhasansagar/slimhub_actions@main
 
-      - name: Remove and Install the necessary Packages
+      - name: Set up the Compilation environment
         run: bash sh/sudo.sh
 
       - name: Git Config
