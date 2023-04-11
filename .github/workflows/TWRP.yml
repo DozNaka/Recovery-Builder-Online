@@ -76,14 +76,22 @@ jobs:
       - name: Remove and Install the necessary Packages
         run: bash sh/sudo.sh
 
-      - name: Sync Source and Minimal Manifest
+      - name: Git Config
         run: |
           rm -rf ~/twrp
           mkdir ~/twrp
           cd ~/twrp
           git config --global user.name "VThang51"
           git config --global user.email "vietthang0511.2@gmail.com"
+          
+      - name: Sync Minimal Manifest
+        run: |
+          cd ~/twrp
           repo init -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_${{ inputs.MANIFEST_TYPE }}.git -b ${{ inputs.MANIFEST_BRANCH }}
+          
+      - name: Sync Source
+        run: |
+          cd ~/twrp
           repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
           rm -rf .rep
       
@@ -101,6 +109,7 @@ jobs:
           . build/envsetup.sh
           lunch ${{ inputs.MAKEFILE_TYPE }}_${{ inputs.DEVICE_CODE }}-eng
           mka ${{ inputs.BUILD_TARGET }}image
+
       - name: Upload to Release
         uses: softprops/action-gh-release@v1
         env:
@@ -112,4 +121,4 @@ jobs:
             Device: ${{ inputs.DEVICE_CODE }}
             Type: TeamWin Recovery Project (TWRP)
             Target: ${{ inputs.BUILD_TARGET }}
-          files: twrp/out/target/product/${{ inputs.DEVICE_CODE }}/${{ inputs.BUILD_TARGET }}.img
+          files: ~/twrp/out/target/product/${{ inputs.DEVICE_CODE }}/${{ inputs.BUILD_TARGET }}.img
