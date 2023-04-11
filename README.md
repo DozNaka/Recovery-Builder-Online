@@ -3,9 +3,9 @@
 
 | Custom Recovery | Workflows | Guide | File Name | Status | Note |
 | --------------: | :-------: | :---: | :-------: | :----: | :--: |
-| TeamWin Recovery Project | [Actions](actions/workflows/TWRP.yml) | [Guide](README.md#teamwin-recovery-project) | [TWRP.yml](.github/workflows/TWRP.yml) | Finished  |  |
-| OrangeFox Recovery Project | [Actions](Recovery-Builder-Workflows/actions/workflows/OFRP.yml) | [Guide](README.md#orangefox-recovery-project) | [OFRP.yml](.github/workflows/OFRP.yml) | Fixing bugs |  |
-| PitchBlack Recovery Project | [Actions](Recovery-Builder-Workflows/actions/workflows/PBRP.yml) | [Guide](README.md#pitchblack-recovery-project) | [PBRP.yml](.github/workflows/PBRP.yml) |  | (Coming soon) |
+| TeamWin Recovery Project | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/TWRP.yml) | [Guide](README.md#teamwin-recovery-project) | [TWRP.yml](.github/workflows/TWRP.yml) | Finished  |  |
+| OrangeFox Recovery Project | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/OFRP.yml) | [Guide](README.md#orangefox-recovery-project) | [OFRP.yml](.github/workflows/OFRP.yml) | Fixing bugs |  |
+| PitchBlack Recovery Project | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/PBRP.yml) | [Guide](README.md#pitchblack-recovery-project) | [PBRP.yml](.github/workflows/PBRP.yml) |  | (Coming soon) |
 | SkyHawk Recovery Project | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/SHRP.yml) | [Guide](README.md#skyhawk-recovery-project) | [SHRP.yml](.github/workflows/SHRP.yml) |  | (Coming soon) |
 | (Coming soon) |  |  |  |  |
 
@@ -97,4 +97,4 @@ export XXXXXX=1 && export YYYYYY=true && export ZZZZZZ=1
 # Note
 - If you intend to develop this project, please clone this repository or submit a pull request.
 - Thank you!!! 
-- Contact me at [Telegram](t.me/VThang51), [Facebook]()
+- Contact me at [Telegram](https://t.me/VThang51), [Facebook](https://m.me/thang.nguyenviet.05112007), [Email](mailto:vietthang0511.2@gmail.com)
