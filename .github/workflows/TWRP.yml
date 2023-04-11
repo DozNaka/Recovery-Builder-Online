@@ -66,6 +66,8 @@ on:
 jobs:
   TeamWin-Recovery-Project:
     runs-on: ubuntu-20.04
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@master
