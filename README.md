@@ -3,7 +3,7 @@
 
 | Custom Recovery | Workflows | Guide | File Name | Status | Note |
 | --------------: | :-------: | :---: | :-------: | :----: | :--: |
-| TeamWin Recovery Project | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/TWRP.yml) | [Guide](https://github.com/VThang51/Recovery-Builder-Workflows/blob/main/README.md#teamwin-recovery-project) | [TWRP.yml](https://github.com/VThang51/Recovery-Builder-Workflows/blob/main/.github/workflows/TWRP.yml) | Finished  |  |
+| TeamWin Recovery Project | [Actions](actions/workflows/TWRP.yml) | [Guide](README.md#teamwin-recovery-project) | [TWRP.yml](github/workflows/TWRP.yml) | Finished  |  |
 | OrangeFox Recovery Project | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/OFRP.yml) | [Guide](https://github.com/VThang51/Recovery-Builder-Workflows/blob/main/README.md#orangefox-recovery-project) | [OFRP.yml](https://github.com/VThang51/Recovery-Builder-Workflows/blob/main/.github/workflows/OFRP.yml) | Fixing bugs |  |
 | PitchBlack Recovery Project | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/PBRP.yml) | [Guide](https://github.com/VThang51/Recovery-Builder-Workflows/blob/main/README.md#pitchblack-recovery-project) | [PBRP.yml](https://github.com/VThang51/Recovery-Builder-Workflows/blob/main/.github/workflows/PBRP.yml) |  | (Coming soon) |
 | SkyHawk Recovery Project | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/SHRP.yml) | [Guide](https://github.com/VThang51/Recovery-Builder-Workflows/blob/main/README.md#skyhawk-recovery-project) | [SHRP.yml](https://github.com/VThang51/Recovery-Builder-Workflows/blob/main/.github/workflows/SHRP.yml) |  | (Coming soon) |
