@@ -80,9 +80,9 @@ jobs:
 
       - name: Git Config
         run: |
-          rm -rf twrp
-          mkdir twrp
-          cd twrp
+          rm -rf ~/twrp
+          mkdir ~/twrp
+          cd ~/twrp
           git config --global user.name "VThang51"
           git config --global user.email "vietthang0511.2@gmail.com"
           
