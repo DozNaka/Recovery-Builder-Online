@@ -75,7 +75,7 @@ jobs:
           cd ofrp
           git clone https://gitlab.com/OrangeFox/sync.git
           cd sync
-          ./orangefox_sync.sh --branch ${{ inputs.BRANCH }} --path /home/runner/work/Recovery-Builder-Workflows/Recovery-Builder-Workflows/ofrp
+          ./orangefox_sync.sh --branch ${{ inputs.BRANCH }} --path /ofrp
 
       - name: Clone Device Tree
         run: |
