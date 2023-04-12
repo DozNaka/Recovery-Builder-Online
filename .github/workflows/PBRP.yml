@@ -73,7 +73,7 @@ jobs:
         run: |
           rm -rf pbrp
           mkdir pbrp
-          cd twrp
+          cd pbrp
           git config --global user.name "VThang51"
           git config --global user.email "vietthang0511.2@gmail.com"
           
