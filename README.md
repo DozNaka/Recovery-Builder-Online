@@ -24,7 +24,7 @@
 | Brand | Phone manufacturer | `samsung` |
 | Device Code | Device Code is recorded in the Device tree | `a13x` |
 | Makefile Type | Look in your Device tree <omni/twrp>_a13x.mk | `twrp` |
-| Add "export" | Add `export` command if needed | `Export XXXXX=1 YYYYY=true ZZZZZ=1` |
+| Add "export" | Add `export` command if needed | `export XXXXX=1 && export YYYYY=true && export ZZZZZ=1` |
 | Build Target | location of stock recovery on the device | `recovery` |
 
 ## OrangeFox Recovery Project
