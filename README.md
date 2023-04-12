@@ -1,7 +1,7 @@
 # How to build Custom Recovery, ROM
 - Supported Custom Recovery, ROM versions:
 
-| Custom Recovery, ROM | Workflows | Guide | File Name | Status | Note |
+| Custom ROM, Recovery | Workflows | Guide | File Name | Status | Note |
 | :------------------- | :-------: | :---: | :-------: | :----: | :--: |
 | TeamWin Recovery Project | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/TWRP.yml) | [Guide](README.md#teamwin-recovery-project) | [TWRP.yml](.github/workflows/TWRP.yml) | Finished  |  |
 | OrangeFox Recovery Project | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/OFRP.yml) | [Guide](README.md#orangefox-recovery-project) | [OFRP.yml](.github/workflows/OFRP.yml) | Fixing bugs |  |
