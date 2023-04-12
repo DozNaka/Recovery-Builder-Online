@@ -55,7 +55,7 @@ on:
           - 'boot'
           - 'vendorboot'
 jobs:
-  TeamWin-Recovery-Project:
+  PitchBlack-Recovery-Project:
     runs-on: ubuntu-20.04
     permissions:
       contents: write
