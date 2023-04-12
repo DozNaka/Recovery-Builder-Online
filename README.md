@@ -1,5 +1,5 @@
-# How to build Custom Recovery, ROM
-- Supported Custom Recovery, ROM versions:
+# How to build Custom ROM, Recovery
+- Supported Custom ROM, Recovery versions:
 
 | Custom ROM, Recovery | Workflows | Guide | File Name | Status | Note |
 | :------------------- | :-------: | :---: | :-------: | :----: | :--: |
