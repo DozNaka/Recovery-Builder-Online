@@ -118,9 +118,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           name: Custom Recovery for ${{ inputs.DEVICE_CODE }}
-          tag_name: ${{ inputs.MANIFEST_BRANCH }}
+          tag_name: TWRP
           body: |
             Device: ${{ inputs.DEVICE_CODE }}
-            Type: TeamWin Recovery Project (TWRP)
+            Type: TeamWin Recovery Project
             Target: ${{ inputs.BUILD_TARGET }}
           files: twrp/out/target/product/${{ inputs.DEVICE_CODE }}/${{ inputs.BUILD_TARGET }}.img
