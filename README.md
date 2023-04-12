@@ -18,15 +18,15 @@
 
 | Workflow Dispatch | Description | Example | Note |
 | :---------------- | :---------- | :-----: | :--- |
-| Manifest Type | https://github.com/minimal-manifest-twrp/platform_manifest_twrp_<omni/aosp/lineageos> | `aosp` |
-| Manifest Branch | Branch of Minimal Manifest (twrp-4.4-deprecated, . . . , twrp-12.1, twrp-14.1) | `twrp-12.1` |
+| Manifest Type | https://github.com/minimal-manifest-twrp/platform_manifest_twrp_<omni/aosp/lineageos> | `aosp` |  |
+| Manifest Branch | Branch of Minimal Manifest (twrp-4.4-deprecated, . . . , twrp-12.1, twrp-14.1) | `twrp-12.1` |  |
 | Device Tree URL | URL GitHub of Device Tree | https://github.com/VThang51/android_device_samsung_a13 | Make sure the Repository is set as `Public` |
-| Device Tree Branch | Branch of Device Tree | `master` |
-| Brand | Phone manufacturer | `samsung` |
-| Device Code | Device Code is recorded in the Device tree | `a13x` |
-| Makefile Type | Look in your Device tree <omni/twrp>_a13x.mk | `twrp` |
-| Add "export" | Add `export` command if needed | `export XXXXX=1 && export YYYYY=true && export ZZZZZ=1` |
-| Build Target | location of stock recovery on the device | `recovery` |
+| Device Tree Branch | Branch of Device Tree | `master` |  |
+| Brand | Phone manufacturer | `samsung` |  |
+| Device Code | Device Code is recorded in the Device tree | `a13x` |  |
+| Makefile Type | Look in your Device tree <omni/twrp>_a13x.mk | `twrp` |  |
+| Add "export" | Add `export` command if needed | `export XXXXX=1 && export YYYYY=true && export ZZZZZ=1` | Don't forget to add `&&` |
+| Build Target | location of stock recovery on the device | `recovery` |  |
 
 ## OrangeFox Recovery Project
 - Coming soon !!!
