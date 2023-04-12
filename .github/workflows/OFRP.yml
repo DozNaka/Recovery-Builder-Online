@@ -89,7 +89,7 @@ jobs:
           
       - name: Compile Custom Recovery 
         run: |
-          cd ofrp/complie
+          cd ofrp/sync/complie
           chmod 777 build/envsetup.sh
           source build/envsetup.sh
           export ALLOW_MISSING_DEPENDENCIES=true
