@@ -83,7 +83,7 @@ jobs:
 
       - name: Clone Device Tree
         run: |
-          cd ofrp/complie
+          cd ofrp/sync/complie
           git clone -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_TREE_URL }} device/${{ inputs.BRAND }}/${{ inputs.DEVICE_CODE }}
 
       - name: Find file
