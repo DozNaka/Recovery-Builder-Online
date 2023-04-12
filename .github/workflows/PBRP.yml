@@ -5,7 +5,7 @@ on:
       MANIFEST_BRANCH:
         description: 'Manifest Branch'
         required: true
-        default: 'twrp-12.1'
+        default: 'android-12.1'
         type: choice
         options:
           - 'twrp-6.0'
