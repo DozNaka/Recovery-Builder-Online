@@ -77,9 +77,9 @@ jobs:
 
       - name: Sync Source
         run: |
-          cd ofrp
-          chmod 777 sync/orangefox_sync.sh
-          sudo ./sync/orangefox_sync.sh --branch ${{ inputs.BRANCH }} --path /complie
+          cd ofrp/sync
+          chmod 777 orangefox_sync.sh
+          sudo ./orangefox_sync.sh --branch ${{ inputs.BRANCH }} --path /complie
 
       - name: Clone Device Tree
         run: |
