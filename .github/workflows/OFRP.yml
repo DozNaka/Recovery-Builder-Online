@@ -78,6 +78,7 @@ jobs:
       - name: Sync Source
         run: |
           cd ofrp/sync
+          mkdir complie
           chmod 777 orangefox_sync.sh
           ./orangefox_sync.sh --branch ${{ inputs.BRANCH }} --path /complie
 
