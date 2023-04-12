@@ -21,9 +21,9 @@
 | Manifest Branch | Branch of Minimal Manifest (twrp-4.4-deprecated, ..., twrp-14.1) | `twrp-12.1` |
 | Device Tree URL | URL GitHub of Device Tree | https://github.com/VThang51/android_device_samsung_a13 |
 | Device Tree Branch | Branch of Device Tree | `master` |
-| Brand | Phone manufacturer | samsung/oppo/nvidia |
+| Brand | Phone manufacturer | `samsung` |
 | Device Code | Device Code is recorded in the Device tree | `a13x` |
-| Makefile Type | 
+| Makefile Type | <omni/twrp>_a13x.mk
 | Add "export" | 
 | Build Target | 
 
