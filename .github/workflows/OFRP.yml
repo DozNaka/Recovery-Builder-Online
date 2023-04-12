@@ -50,6 +50,8 @@ on:
 jobs:
   OrangeFox-Recovery-Project:
     runs-on: ubuntu-20.04
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@master
@@ -69,20 +71,20 @@ jobs:
         
       - name: Sync Source and Minimal Manifest
         run: |
-          mkdir ~/OrangeFox
-          cd ~/OrangeFox
+          mkdir ofrp
+          cd ofrp
           git clone https://gitlab.com/OrangeFox/sync.git
-          cd ~/OrangeFox/sync/
-          ./orangefox_sync.sh --branch ${{ inputs.BRANCH }} --path ~/OrangeFox
+          cd sync
+          ./orangefox_sync.sh --branch ${{ inputs.BRANCH }} --path /home/runner/work/Recovery-Builder-Workflows/Recovery-Builder-Workflows/ofrp
 
       - name: Clone Device Tree
         run: |
-          cd ~/OrangeFox
+          cd ofrp
           git clone -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_TREE_URL }} device/${{ inputs.BRAND }}/${{ inputs.DEVICE_CODE }}
           
       - name: Compile Custom Recovery 
         run: |
-          cd ~/OrangeFox
+          cd ofrp
           chmod 777 build/envsetup.sh
           source build/envsetup.sh
           export ALLOW_MISSING_DEPENDENCIES=true
@@ -103,4 +105,4 @@ jobs:
             Device: ${{ inputs.DEVICE_CODE }}
             Type: OrangeFox Recovery Project (OFRP)
             Target: ${{ inputs.BUILD_TARGET }}
-          files: ~/fox_${{ inputs.BRANCH }}/out/target/product/${{ inputs.DEVICE_NAME }}/OrangeFox-unofficial-${{ inputs.DEVICE_NAME }}.img
+          files: ofrp/out/target/product/${{ inputs.DEVICE_NAME }}/OrangeFox-unofficial-${{ inputs.DEVICE_NAME }}.img
