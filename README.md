@@ -19,7 +19,7 @@
 | Workflow Dispatch | Description | Example |
 | :---------------: | :---------: | :-----: |
 | Manifest Type | https://github.com/minimal-manifest-twrp/platform_manifest_twrp_<omni/aosp/lineageos> | `aosp` |
-| Manifest Branch | Branch of Minimal Manifest (twrp-4.4-deprecated, ..., twrp-14.1) | `twrp-12.1` |
+| Manifest Branch | Branch of Minimal Manifest (twrp-4.4-deprecated, . . . , twrp-14.1) | `twrp-12.1` |
 | Device Tree URL | URL GitHub of Device Tree | https://github.com/VThang51/android_device_samsung_a13 |
 | Device Tree Branch | Branch of Device Tree | `master` |
 | Brand | Phone manufacturer | `samsung` |
