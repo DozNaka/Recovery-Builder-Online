@@ -73,18 +73,17 @@ jobs:
         run: |
           mkdir ofrp
           cd ofrp
-          mkdir complie
           git clone https://gitlab.com/OrangeFox/sync.git
 
       - name: Sync Source
         run: |
           cd ofrp/sync
           chmod 777 orangefox_sync.sh
-          ./orangefox_sync.sh --branch ${{ inputs.BRANCH }} --path /home/runner/work/ROM_Recovery-Builder-Workflows/ROM_Recovery-Builder-Workflows/ofrp/complie
+          ./orangefox_sync.sh --branch ${{ inputs.BRANCH }} --path /complie
 
       - name: Clone Device Tree
         run: |
-          cd ofrp/complie
+          cd ofrp/sync/complie
           git clone -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_TREE_URL }} device/${{ inputs.BRAND }}/${{ inputs.DEVICE_CODE }}
           
       - name: Compile Custom Recovery 
