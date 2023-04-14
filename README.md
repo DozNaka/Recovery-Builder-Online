@@ -11,7 +11,7 @@
 | PitchBlack Recovery Project | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/PBRP.yml) | [PBRP.yml](.github/workflows/PBRP.yml) | Finished |  |
 | SkyHawk Recovery Project | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/SHRP.yml) | [SHRP.yml](.github/workflows/SHRP.yml) | Finished |  |
 | RedWolf Recovery Project | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/RWRP.yml) | [RWRP.yml](.github/workflows/RWRP.yml) |  | (Coming soon) |
-| (Coming soon) |  |  |  |  |
+| (There will be more in the future) |  |  |  |  |
 
 - DON'T FORGET TO READ THE NOTES
 ## General Instructions
@@ -35,7 +35,7 @@ TeamWin-RP Builder
 | Brand | Phone manufacturer | `samsung` |  |
 | Device Code | Device Code is recorded in the Device tree | `a13x` |  |
 | Makefile Type | Look in your Device tree <omni/twrp>_a13x.mk | `twrp` |  |
-| Add "export" | Add `export` command if needed | `export XXXXX=1 && export YYYYY=true && export ZZZZZ=1` | Don't forget to add `&&` |
+| Add "export" | Add `export` command if needed | `export XXXXX=1 && export YYYYY=true && export ZZZZZ=1` | Adding `export ALLOW_MISSING_DEPENDENCIES=true` was not necessary since I added it to the Workflow (Don't forget to add `&&`) |
 | Build Target | location of stock recovery on the device | `recovery` |  |
 
 # Note
