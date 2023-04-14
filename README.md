@@ -14,7 +14,7 @@
 | (Coming soon) |  |  |  |  |
 
 - DON'T FORGET TO READ THE NOTES
-## TeamWin Recovery Project
+## General Instructions
 
 | Workflow Dispatch | Description | Example | Note |
 | :---------------- | :---------- | :-----: | :--- |
@@ -27,18 +27,6 @@
 | Makefile Type | Look in your Device tree <omni/twrp>_a13x.mk | `twrp` |  |
 | Add "export" | Add `export` command if needed | `export XXXXX=1 && export YYYYY=true && export ZZZZZ=1` | Don't forget to add `&&` |
 | Build Target | location of stock recovery on the device | `recovery` |  |
-
-## OrangeFox Recovery Project
-- Coming soon !!!
-
-## PitchBlack Recovery Project
-- Coming soon !!!
-
-## SkyHawk Recovery Project
-- Coming soon !!!
-
-## RedWolf Recovery Project
-- Coming soon !!!
 
 # Note
 - If you intend to develop this project, please clone this repository or submit a pull request.
