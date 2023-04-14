@@ -79,15 +79,12 @@ jobs:
         run: bash sh/sudo.sh
 
       - name: Git Config
-        run: |
-          rm -rf twrp
-          mkdir twrp
-          cd twrp
-          git config --global user.name "VThang51"
-          git config --global user.email "vietthang0511.2@gmail.com"
+        uses: actions/setup-git@v2
           
       - name: Sync Minimal Manifest
         run: |
+          rm -rf twrp
+          mkdir twrp
           cd twrp
           repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_${{ inputs.MANIFEST_TYPE }}.git -b ${{ inputs.MANIFEST_BRANCH }}
           
