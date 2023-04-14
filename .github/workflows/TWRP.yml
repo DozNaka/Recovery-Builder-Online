@@ -78,7 +78,7 @@ jobs:
       - name: Set up the Compilation environment
         run: bash sh/sudo.sh
 
-            - name: Git Config
+      - name: Git Config
         run: |
           rm -rf twrp
           mkdir twrp
