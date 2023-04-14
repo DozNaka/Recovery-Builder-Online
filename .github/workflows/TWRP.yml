@@ -78,13 +78,16 @@ jobs:
       - name: Set up the Compilation environment
         run: bash sh/sudo.sh
 
-      - name: Git Config
-        uses: actions/setup-git@v2
-          
-      - name: Sync Minimal Manifest
+            - name: Git Config
         run: |
           rm -rf twrp
           mkdir twrp
+          cd twrp
+          git config --global user.name "${{ env.GITHUB_ACTOR }}"
+          git config --global user.email "${{ env.GITHUB_EMAIL }}"
+          
+      - name: Sync Minimal Manifest
+        run: |
           cd twrp
           repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_${{ inputs.MANIFEST_TYPE }}.git -b ${{ inputs.MANIFEST_BRANCH }}
           
