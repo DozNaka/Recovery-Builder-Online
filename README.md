@@ -15,6 +15,16 @@
 
 - DON'T FORGET TO READ THE NOTES
 ## General Instructions
+- 1, Let's move to the `Actions` tab
+- 2, Choose your Custom Recovery
+```bash
+OrangeFox-RP Builder (Fixing Bug)
+PitchBlack-RP Builder
+RedWolf-RP Builder (Not created yet)
+SkyHawk-RP Builder
+TeamWin-RP Builder
+```
+- 3, Click `Run Workflow` then fill in the necessary information according to the instructions in the following table
 
 | Workflow Dispatch | Description | Example | Note |
 | :---------------- | :---------- | :-----: | :--- |
