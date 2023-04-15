@@ -103,6 +103,11 @@ jobs:
           lunch ${{ inputs.MAKEFILE_TYPE }}_${{ inputs.DEVICE_CODE }}-eng
           mka ${{ inputs.BUILD_TARGET }}image
         continue-on-error: true
+          
+      - name: Rename File 
+        run: |
+          cd pbrp/out/target/product/${{ inputs.DEVICE_CODE }}
+          mv ${{ inputs.BUILD_TARGET }}.img PBRP-${{ inputs.DEVICE_CODE }}-UNOFFICIAL.img
 
       - name: Upload to Release
         uses: softprops/action-gh-release@v1
@@ -115,4 +120,4 @@ jobs:
             Device: ${{ inputs.DEVICE_CODE }}
             Type: PitchBlack Recovery Project
             Target: ${{ inputs.BUILD_TARGET }}
-          files: pbrp/out/target/product/${{ inputs.DEVICE_CODE }}/${{ inputs.BUILD_TARGET }}.img
+          files: pbrp/out/target/product/${{ inputs.DEVICE_CODE }}/PBRP-${{ inputs.DEVICE_CODE }}-UNOFFICIAL.img
