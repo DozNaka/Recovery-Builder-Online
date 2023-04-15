@@ -73,7 +73,7 @@ jobs:
         uses: actions/checkout@master
 
       - name: Free up space
-        uses: rokibhasansagar/slimhub_actions@main
+        run: bash sh/unin.sh
 
       - name: Set up the Compilation environment
         run: bash sh/sudo.sh
