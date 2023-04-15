@@ -28,7 +28,7 @@ TeamWin-RP Builder
 
 | Workflow Dispatch | Description | Example | Find where? | Note |
 | :---------------- | :---------- | :-----: | :---------: | :--: |
-| Manifest Type | [omni](https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni), [aosp](https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp), [lineageos](https://github.com/minimal-manifest-twrp/platform_manifest_twrp_lineageos) | `aosp` | Look in the tail of the Manifest link  http://github.com/minimal-manifest-twrp/platform_manifest_twrp_(`omni`/`aosp`/`lineageos`) |  |
+| Manifest Type | [omni](https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni), [aosp](https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp), [lineageos](https://github.com/minimal-manifest-twrp/platform_manifest_twrp_lineageos) | `aosp` | Look in the tail of the Manifest link  github.com/minimal-manifest-twrp/platform_manifest_twrp_(`omni`/`aosp`/`lineageos`) |  |
 | Manifest Branch | Branch of Minimal Manifest (twrp-4.4-deprecated, . . . , twrp-12.1, twrp-14.1) | `twrp-12.1` | Search in the respective Manifest link |  |
 | Device Tree URL | URL GitHub of Device Tree | https://github.com/VThang51/android_device_samsung_a13 | GitHub | Make sure the Repository is set as `Public` |
 | Device Tree Branch | Branch of Device Tree | `master` | Search in Device Tree Links |  |
