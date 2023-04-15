@@ -1,0 +1,132 @@
+name: TeamWin-RP Builder (Test Command)
+on:
+  workflow_dispatch:
+    inputs:
+      MANIFEST_TYPE:
+        description: 'Manifest Type'
+        required: true
+        default: 'aosp'
+        type: choice
+        options:
+          - 'omni'
+          - 'aosp'
+          - 'lineageos'
+      MANIFEST_BRANCH:
+        description: 'Manifest Branch'
+        required: true
+        default: 'twrp-12.1'
+        type: choice
+        options:
+          - 'twrp-4.4-deprecated'
+          - 'twrp-5.1'
+          - 'twrp-6.0'
+          - 'twrp-7.1'
+          - 'twrp-8.1'
+          - 'twrp-9.0'
+          - 'twrp-10.0-deprecated'
+          - 'twrp-11'
+          - 'twrp-12.1'
+          - 'twrp-14.1'
+      DEVICE_TREE_URL:
+        description: 'Device Tree URL'
+        required: true
+        default: 'https://github.com/VThang51/android_device_samsung_a13'
+      DEVICE_TREE_BRANCH:
+        description: 'Device Tree Branch'
+        required: true
+        default: 'master'
+      BRAND:
+        description: 'Brand'
+        required: true
+        default: 'samsung'
+      DEVICE_CODE:
+        description: 'Device Code'
+        required: true
+        default: 'a13x'
+      MAKEFILE_TYPE:
+        description: 'Makefile Type'
+        required: true
+        default: 'twrp'
+        type: choice
+        options:
+          - 'omni'
+          - 'twrp'
+      ADD_EXPORT:
+        description: 'Add "export"'
+        required: false
+      BUILD_TARGET:
+        description: 'Build Target'
+        required: true
+        default: 'recovery'
+        type: choice
+        options:
+          - 'recovery'
+          - 'boot'
+          - 'vendorboot'
+jobs:
+  TeamWin-Recovery-Project:
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Free up space
+        run: bash sh/unin.sh
+
+      - name: Set up the Compilation environment
+        run: bash sh/sudo.sh
+
+      - name: Git Config
+        run: |
+          rm -rf twrp
+          mkdir twrp
+          cd twrp
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git config --global user.name "${{ github.actor }}"
+          
+      - name: Sync Minimal Manifest
+        run: |
+          cd twrp
+          repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_${{ inputs.MANIFEST_TYPE }}.git -b ${{ inputs.MANIFEST_BRANCH }}
+          
+      - name: Sync Source
+        run: |
+          cd twrp
+          repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
+          rm -rf .rep
+      
+      - name: Clone Device Tree
+        run: |
+          cd twrp
+          git clone -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_TREE_URL }} device/${{ inputs.BRAND }}/${{ inputs.DEVICE_CODE }}
+
+      - name: Compile Custom Recovery 
+        run: |
+          cd twrp
+          chmod 777 build/envsetup.sh
+          export ALLOW_MISSING_DEPENDENCIES=true
+          ${{ inputs.ADD_EXPORT }}
+          . build/envsetup.sh
+          lunch ${{ inputs.MAKEFILE_TYPE }}_${{ inputs.DEVICE_CODE }}-eng
+          mka ${{ inputs.BUILD_TARGET }}image
+        continue-on-error: true
+
+      - name: Rename File
+        run: |
+          cd twrp/out/target/product/${{ inputs.DEVICE_CODE }}
+          mv ${{ inputs.BUILD_TARGET }}.img unofficialtwrp-${{ inputs.DEVICE_CODE }}.img
+
+      - name: Upload to Release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          name: Custom Recovery for ${{ inputs.DEVICE_CODE }}
+          tag_name: TWRP
+          body: |
+            Device: ${{ inputs.DEVICE_CODE }}
+            Type: TeamWin Recovery Project
+            Target: ${{ inputs.BUILD_TARGET }}
+          files: twrp/out/target/product/${{ inputs.DEVICE_CODE }}/unofficialtwrp-${{ inputs.DEVICE_CODE }}.img
