@@ -35,8 +35,8 @@ TeamWin-RP Builder
 | Brand | Phone manufacturer | `samsung` | You can find it in the `BoardConfig.mk` file  DEVICE_PATH := device/`samsung`/$(DEVICE_CODENAME) |  |
 | Device Code | Device Code is recorded in the Device tree | `a13x` | You can find it in the `BoardConfig.mk` file  DEVICE_CODENAME := `a13x` |  |
 | Makefile Type | Look in your Device tree `<omni/twrp>_a13x.mk` | `twrp` | `twrp`_a13x.mk |
-| Add "export" | Add `export` command if needed | `export XXXXX=1 && export YYYYY=true && export ZZZZZ=1` | Minimal Manifest | Adding `export ALLOW_MISSING_DEPENDENCIES=true` was not necessary since I added it to the Workflow (and Don't forget to add `&&`) |
-| Build Target | location of stock recovery on the device | `recovery` | mka **recovery**image |
+| Add "export" | Add `export` command if needed | `export XXXXX=1 && export YYYYY=true && export ZZZZZ=1` | Search in Minimal Manifest or [Google](http://google.com) | Adding `export ALLOW_MISSING_DEPENDENCIES=true` was not necessary since I added it to the Workflow (and Don't forget to add `&&`) |
+| Build Target | location of stock recovery on the device | `recovery` | mka `recovery`image |
 
 # Note
 - If you intend to develop this project, please clone this repository or submit a pull request.
