@@ -3,14 +3,14 @@
 
 | Custom ROM, Recovery | Workflows | File Name | Status | Note |
 | :------------------- | :-------: | :-------: | :----: | :--: |
-| CorvusOS |  |  |  | (Coming soon) |
-| LineageOS |  |  |  | (Coming soon) |
-| Evolution X |  |  |  | (Coming soon) |
-| TeamWin Recovery Project | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/TWRP.yml) | [TWRP.yml](.github/workflows/TWRP.yml) | Finished  |  |
-| OrangeFox Recovery Project | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/OFRP.yml) | [OFRP.yml](.github/workflows/OFRP.yml) | Fixing bugs |  |
-| PitchBlack Recovery Project | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/PBRP.yml) | [PBRP.yml](.github/workflows/PBRP.yml) | Finished | [Note](https://github.com/VThang51/ROM_Recovery-Builder-Workflows/blob/main/README.md#pitchblack-recovery-project) |
-| SkyHawk Recovery Project | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/SHRP.yml) | [SHRP.yml](.github/workflows/SHRP.yml) | Finished |  |
-| RedWolf Recovery Project | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/RWRP.yml) | [RWRP.yml](.github/workflows/RWRP.yml) |  |  |
+| **CorvusOS** |  |  |  | (Coming soon) |
+| **LineageOS** |  |  |  | (Coming soon) |
+| **Evolution X** |  |  |  | (Coming soon) |
+| **TeamWin Recovery Project** | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/TWRP.yml) | [TWRP.yml](.github/workflows/TWRP.yml) | Finished  |  |
+| **OrangeFox Recovery Project** | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/OFRP.yml) | [OFRP.yml](.github/workflows/OFRP.yml) | Fixing bugs |  |
+| **PitchBlack Recovery Project** | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/PBRP.yml) | [PBRP.yml](.github/workflows/PBRP.yml) | Finished | [Note](https://github.com/VThang51/ROM_Recovery-Builder-Workflows/blob/main/README.md#pitchblack-recovery-project) |
+| **SkyHawk Recovery Project** | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/SHRP.yml) | [SHRP.yml](.github/workflows/SHRP.yml) | Finished |  |
+| **RedWolf Recovery Project** | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/RWRP.yml) | [RWRP.yml](.github/workflows/RWRP.yml) |  |  |
 | (There will be more in the future) |  |  |  |  |
 
 - DON'T FORGET TO READ THE NOTES
@@ -28,15 +28,15 @@ TeamWin-RP Builder
 
 | Workflow Dispatch | Description | Example | Find where? | Note |
 | :---------------- | :---------- | :-----: | :---------: | :--: |
-| Manifest Type | [omni](https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni), [aosp](https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp), [lineageos](https://github.com/minimal-manifest-twrp/platform_manifest_twrp_lineageos) | `aosp` | Look in the tail of the Manifest link:  github.com/minimal-manifest-twrp/platform_manifest_twrp_(`omni`/`aosp`/`lineageos`) |  |
-| Manifest Branch | Branch of Minimal Manifest (twrp-4.4-deprecated, . . . , twrp-12.1, twrp-14.1) | `twrp-12.1` | Search in the respective Manifest link |  |
-| Device Tree URL | URL GitHub of Device Tree | https://github.com/VThang51/android_device_samsung_a13 | GitHub | Make sure the Repository is set as `Public` |
-| Device Tree Branch | Branch of Device Tree | `master` | Search in Device Tree Links |  |
-| Brand | Phone manufacturer | `samsung` | You can find it in the `BoardConfig.mk` file  DEVICE_PATH := device/`samsung`/$(DEVICE_CODENAME) |  |
-| Device Code | Device Code is recorded in the Device tree | `a13x` | You can find it in the `BoardConfig.mk` file  DEVICE_CODENAME := `a13x` |  |
-| Makefile Type | Look in your Device tree `<omni/twrp>_a13x.mk` | `twrp` | `twrp`_a13x.mk |
-| Add "export" | Add `export` command if needed | `export XXXXX=1 && export YYYYY=true && export ZZZZZ=1` | Search in Minimal Manifest or [Google](http://google.com) | Adding `export ALLOW_MISSING_DEPENDENCIES=true` was not necessary since I added it to the Workflow (and Don't forget to add `&&`) |
-| Build Target | location of stock recovery on the device | `recovery` | mka `recovery`image |
+| **Manifest Type** | [omni](https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni), [aosp](https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp), [lineageos](https://github.com/minimal-manifest-twrp/platform_manifest_twrp_lineageos) | `aosp` | Look in the tail of the Manifest link:  github.com/minimal-manifest-twrp/platform_manifest_twrp_(`omni`/`aosp`/`lineageos`) |  |
+| **Manifest Branch** | Branch of Minimal Manifest (twrp-4.4-deprecated, . . . , twrp-12.1, twrp-14.1) | `twrp-12.1` | Search in the respective Manifest link |  |
+| **Device Tree URL** | URL GitHub of Device Tree | https://github.com/VThang51/android_device_samsung_a13 | GitHub | Make sure the Repository is set as `Public` |
+| **Device Tree Branch** | Branch of Device Tree | `master` | Search in Device Tree Links |  |
+| **Brand** | Phone manufacturer | `samsung` | You can find it in the `BoardConfig.mk` file  DEVICE_PATH := device/`samsung`/$(DEVICE_CODENAME) |  |
+| **Device Code** | Device Code is recorded in the Device tree | `a13x` | You can find it in the `BoardConfig.mk` file  DEVICE_CODENAME := `a13x` |  |
+| **Makefile Type** | Look in your Device tree `<omni/twrp>_a13x.mk` | `twrp` | `twrp`_a13x.mk |
+| **Add "export"** | Add `export` command if needed | `export XXXXX=1 && export YYYYY=true && export ZZZZZ=1` | Search in Minimal Manifest or [Google](http://google.com) | Adding `export ALLOW_MISSING_DEPENDENCIES=true` was not necessary since I added it to the Workflow (and Don't forget to add `&&`) |
+| **Build Target** | location of stock recovery on the device | `recovery` | mka `recovery`image |
 
 # Note
 ## General Note
