@@ -74,8 +74,8 @@ jobs:
           rm -rf pbrp
           mkdir pbrp
           cd pbrp
-          git config --global user.name "VThang51"
-          git config --global user.email "vietthang0511.2@gmail.com"
+          git config --global user.email ${{ github.actor }}@users.noreply.github.com
+          git config --global user.name ${{ github.actor }}
           
       - name: Sync Minimal Manifest
         run: |
