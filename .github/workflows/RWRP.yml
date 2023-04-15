@@ -84,6 +84,7 @@ jobs:
         run: |
           cd rwrp
           git clone -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_TREE_URL }} device/${{ inputs.BRAND }}/${{ inputs.DEVICE_CODE }}
+
       - name: Compile Custom Recovery 
         run: |
           cd rwrp
@@ -93,6 +94,8 @@ jobs:
           . build/envsetup.sh
           lunch ${{ inputs.MAKEFILE_TYPE }}_${{ inputs.DEVICE_CODE }}-eng
           mka ${{ inputs.BUILD_TARGET }}image
+        continue-on-error: true
+
       - name: Upload to Release
         uses: softprops/action-gh-release@v1
         env:
