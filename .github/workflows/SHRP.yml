@@ -97,6 +97,11 @@ jobs:
           mka ${{ inputs.BUILD_TARGET }}image
         continue-on-error: true
 
+      - name: Rename File
+        run: |
+          cd shrp/out/target/product/${{ inputs.DEVICE_CODE }}
+          mv ${{ inputs.BUILD_TARGET }}.img SHRP-UnOfficial_${{ inputs.DEVICE_CODE }}.img
+
       - name: Upload to Release
         uses: softprops/action-gh-release@v1
         env:
@@ -108,4 +113,4 @@ jobs:
             Device: ${{ inputs.DEVICE_CODE }}
             Type: SkyHawk Recovery Project
             Target: ${{ inputs.BUILD_TARGET }}
-          files: shrp/out/target/product/${{ inputs.DEVICE_CODE }}/${{ inputs.BUILD_TARGET }}.img
+          files: shrp/out/target/product/${{ inputs.DEVICE_CODE }}/SHRP-UnOfficial_${{ inputs.DEVICE_CODE }}.img
