@@ -10,7 +10,7 @@
 | OrangeFox Recovery Project | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/OFRP.yml) | [OFRP.yml](.github/workflows/OFRP.yml) | Fixing bugs |  |
 | PitchBlack Recovery Project | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/PBRP.yml) | [PBRP.yml](.github/workflows/PBRP.yml) | Finished |  |
 | SkyHawk Recovery Project | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/SHRP.yml) | [SHRP.yml](.github/workflows/SHRP.yml) | Finished |  |
-| RedWolf Recovery Project | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/RWRP.yml) | [RWRP.yml](.github/workflows/RWRP.yml) |  | (Coming soon) |
+| RedWolf Recovery Project | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/RWRP.yml) | [RWRP.yml](.github/workflows/RWRP.yml) |  | (Fixing Bug) |
 | (There will be more in the future) |  |  |  |  |
 
 - DON'T FORGET TO READ THE NOTES
@@ -20,7 +20,7 @@
 ```bash
 OrangeFox-RP Builder (Fixing Bug)
 PitchBlack-RP Builder
-RedWolf-RP Builder (Not created yet)
+RedWolf-RP Builder (Fixing Bug)
 SkyHawk-RP Builder
 TeamWin-RP Builder
 ```
