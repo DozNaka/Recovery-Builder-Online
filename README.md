@@ -46,3 +46,6 @@ TeamWin-RP Builder
 
 ### PitchBlack Recovery Project
 - In your device tree, open the file omni_<device>.mk (or twrp_<device>.mk or aosp_<device>.mk) and edit `vendor/omni...` to `vendor/pb` so you won't get an issue when building!
+
+# Thanks to the contributors
+- [PartedMagic](https://github.com/partedMagic)
