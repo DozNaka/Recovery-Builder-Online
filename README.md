@@ -26,17 +26,17 @@ TeamWin-RP Builder
 ```
 - 3, Click `Run Workflow` then fill in the necessary information according to the instructions in the following table
 
-| Workflow Dispatch | Description | Example | Illustration | Note |
-| :---------------- | :---------- | :-----: | :----------: | :--: |
-| Manifest Type | [omni](https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni), [aosp](https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp), [lineageos](https://github.com/minimal-manifest-twrp/platform_manifest_twrp_lineageos) | `aosp` | github.com/minimal-manifest-twrp/platform_manifest_twrp_**omni**  github.com/minimal-manifest-twrp/platform_manifest_twrp_**aosp**  github.com/minimal-manifest-twrp/platform_manifest_twrp_**lineageos** |  |
+| Workflow Dispatch | Description | Example | Find where? | Note |
+| :---------------- | :---------- | :-----: | :---------: | :--: |
+| Manifest Type | [omni](https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni), [aosp](https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp), [lineageos](https://github.com/minimal-manifest-twrp/platform_manifest_twrp_lineageos) | `aosp` | github.com/minimal-manifest-twrp/platform_manifest_twrp_`omni`  github.com/minimal-manifest-twrp/platform_manifest_twrp_`aosp`  github.com/minimal-manifest-twrp/platform_manifest_twrp_`lineageos` |  |
 | Manifest Branch | Branch of Minimal Manifest (twrp-4.4-deprecated, . . . , twrp-12.1, twrp-14.1) | `twrp-12.1` |  |  |
-| Device Tree URL | URL GitHub of Device Tree | https://github.com/VThang51/android_device_samsung_a13 |  | Make sure the Repository is set as `Public` |
+| Device Tree URL | URL GitHub of Device Tree | https://github.com/VThang51/android_device_samsung_a13 | GitHub | Make sure the Repository is set as `Public` |
 | Device Tree Branch | Branch of Device Tree | `master` | ![](https://raw.githubusercontent.com/VThang51/ROM_Recovery-Builder-Workflows/main/sh/Guide1.png) |  |
-| Brand | Phone manufacturer | `samsung` | You can find it in the `BoardConfig.mk` file ![](https://raw.githubusercontent.com/VThang51/ROM_Recovery-Builder-Workflows/main/sh/Guide2.png) |  |
-| Device Code | Device Code is recorded in the Device tree | `a13x` | You can find it in the `BoardConfig.mk` file ![](https://raw.githubusercontent.com/VThang51/ROM_Recovery-Builder-Workflows/main/sh/Guide2.png) |  |
-| Makefile Type | Look in your Device tree `<omni/twrp>_a13x.mk` | `twrp` | ![](https://raw.githubusercontent.com/VThang51/ROM_Recovery-Builder-Workflows/main/sh/Guide3.png) |  |
-| Add "export" | Add `export` command if needed | `export XXXXX=1 && export YYYYY=true && export ZZZZZ=1` | Adding `export ALLOW_MISSING_DEPENDENCIES=true` was not necessary since I added it to the Workflow (Don't forget to add `&&`) |  |
-| Build Target | location of stock recovery on the device | `recovery` |  |  |
+| Brand | Phone manufacturer | `samsung` | You can find it in the `BoardConfig.mk` file  DEVICE_PATH := device/__samsung__/$(DEVICE_CODENAME) |  |
+| Device Code | Device Code is recorded in the Device tree | `a13x` | You can find it in the `BoardConfig.mk` file  DEVICE_CODENAME := __a13x__ |  |
+| Makefile Type | Look in your Device tree `<omni/twrp>_a13x.mk` | `twrp` | `twrp`_a13x.mk |
+| Add "export" | Add `export` command if needed | `export XXXXX=1 && export YYYYY=true && export ZZZZZ=1` | Minimal Manifest | Adding `export ALLOW_MISSING_DEPENDENCIES=true` was not necessary since I added it to the Workflow (Don't forget to add `&&`) |
+| Build Target | location of stock recovery on the device | `recovery` | mka **recovery**image |
 
 # Note
 - If you intend to develop this project, please clone this repository or submit a pull request.
