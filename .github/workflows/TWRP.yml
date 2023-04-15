@@ -113,6 +113,11 @@ jobs:
           mka ${{ inputs.BUILD_TARGET }}image
         continue-on-error: true
 
+      - name: Rename File
+        run: |
+          cd twrp/out/target/product/${{ inputs.DEVICE_CODE }}
+          mv ${{ inputs.BUILD_TARGET }}.img unofficialtwrp-${{ inputs.DEVICE_CODE }}.img
+
       - name: Upload to Release
         uses: softprops/action-gh-release@v1
         env:
@@ -124,4 +129,4 @@ jobs:
             Device: ${{ inputs.DEVICE_CODE }}
             Type: TeamWin Recovery Project
             Target: ${{ inputs.BUILD_TARGET }}
-          files: twrp/out/target/product/${{ inputs.DEVICE_CODE }}/${{ inputs.BUILD_TARGET }}.img
+          files: twrp/out/target/product/${{ inputs.DEVICE_CODE }}/unofficialtwrp-${{ inputs.DEVICE_CODE }}.img
