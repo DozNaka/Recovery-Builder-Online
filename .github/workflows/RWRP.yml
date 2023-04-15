@@ -72,7 +72,7 @@ jobs:
       - name: Sync Minimal Manifest
         run: |
           cd rwrp
-          repo init --depth=1 -u https://github.com/SHRP/manifest.git -b ${{ inputs.MANIFEST_BRANCH }}
+          repo init --depth=1 -u https://github.com/RedWolfRecovery/rw_manifest.git -b ${{ inputs.MANIFEST_BRANCH }}
           
       - name: Sync Source
         run: |
