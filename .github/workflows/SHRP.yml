@@ -57,9 +57,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
-      - name: Free up space
-        uses: rokibhasansagar/slimhub_actions@main
-
       - name: Set up the Compilation environment
         run: bash sh/sudo.sh
 
