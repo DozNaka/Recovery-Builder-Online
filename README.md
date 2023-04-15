@@ -29,12 +29,12 @@ TeamWin-RP Builder
 | Workflow Dispatch | Description | Example | Note |
 | :---------------- | :---------- | :-----: | :--- |
 | Manifest Type | [omni](https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni), [aosp](https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp), [lineageos](https://github.com/minimal-manifest-twrp/platform_manifest_twrp_lineageos) | `aosp` |  |
-| Manifest Branch | Branch of Minimal Manifest (twrp-4.4-deprecated, . . . , twrp-12.1, twrp-14.1) | `twrp-12.1` |  |
+| Manifest Branch | Branch of Minimal Manifest (twrp-4.4-deprecated, . . . , twrp-12.1, twrp-14.1) | `twrp-12.1` | Click on the link above you will know the corresponding `Branch` |
 | Device Tree URL | URL GitHub of Device Tree | https://github.com/VThang51/android_device_samsung_a13 | Make sure the Repository is set as `Public` |
-| Device Tree Branch | Branch of Device Tree | `master` |  |
-| Brand | Phone manufacturer | `samsung` |  |
-| Device Code | Device Code is recorded in the Device tree | `a13x` |  |
-| Makefile Type | Look in your Device tree <omni/twrp>_a13x.mk | `twrp` |  |
+| Device Tree Branch | Branch of Device Tree | `master` | You can find it in the BoardConfig.mk file |
+| Brand | Phone manufacturer | `samsung` | You can find it in the `BoardConfig.mk` file |
+| Device Code | Device Code is recorded in the Device tree | `a13x` | ![You can find it in the `BoardConfig.mk` file](https://img-corp.net/assets/img/IMG_logo_big_blue.png) |
+| Makefile Type | Look in your Device tree <omni/twrp>_a13x.mk | `twrp` | Simply the beginning of the filename in your Repositories |
 | Add "export" | Add `export` command if needed | `export XXXXX=1 && export YYYYY=true && export ZZZZZ=1` | Adding `export ALLOW_MISSING_DEPENDENCIES=true` was not necessary since I added it to the Workflow (Don't forget to add `&&`) |
 | Build Target | location of stock recovery on the device | `recovery` |  |
 
