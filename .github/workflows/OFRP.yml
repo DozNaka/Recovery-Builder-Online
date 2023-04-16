@@ -56,10 +56,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
-      - name: Free up Space
-        uses: rokibhasansagar/slimhub_actions@main
+      - name: Free up space
+        run: bash sh/unin.sh
 
-      - name: Remove and Install the necessary Packages
+      - name: Set up the Compilation environment
         run: |
           bash sh/sudo.sh
           cd ~
@@ -69,31 +69,26 @@ jobs:
           sudo bash setup/install_android_sdk.sh
         continue-on-error: true
         
-      - name: Sync Minimal Manifest
-        run: |
-          mkdir ofrp
-          cd ofrp
-          git clone https://gitlab.com/OrangeFox/sync.git
-
       - name: Sync Source
         run: |
-          cd ofrp/sync
-          chmod 777 orangefox_sync.sh
-          sudo ./orangefox_sync.sh --branch ${{ inputs.BRANCH }} --path /complie
+          mkdir ~/ofrp
+          cd ~/ofrp
+          git clone https://gitlab.com/OrangeFox/sync.git
 
-      - name: Find file
+      - name: Sync Minimal Manifest
         run: |
-          cd ofrp
-          find . -name *.sh
+          cd ~/ofrp/sync
+          chmod 777 orangefox_sync.sh
+          sudo ./orangefox_sync.sh --branch ${{ inputs.BRANCH }} --path ~/ofrp
 
       - name: Clone Device Tree
         run: |
-          cd ofrp/sync/complie
+          cd ~/ofrp
           git clone -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_TREE_URL }} device/${{ inputs.BRAND }}/${{ inputs.DEVICE_CODE }}
           
       - name: Compile Custom Recovery 
         run: |
-          cd ofrp/complie
+          cd ~/ofrp
           chmod 777 build/envsetup.sh
           source build/envsetup.sh
           export ALLOW_MISSING_DEPENDENCIES=true
@@ -103,15 +98,19 @@ jobs:
           lunch ${{ inputs.MAKEFILE_TYPE }}_${{ inputs.DEVICE_CODE }}-eng
           mka ${{ inputs.BUILD_TARGET }}image
 
+      - name: Rename File 
+        run: |
+          mv ~/ofrp/out/target/product/${{ inputs.DEVICE_NAME }}/OrangeFox-unofficial-${{ inputs.DEVICE_NAME }}.img OrangeFox-unofficial-${{ inputs.DEVICE_NAME }}.img
+
       - name: Upload to Release
         uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           name: Custom Recovery for ${{ inputs.DEVICE_CODE }}
-          tag_name: ${{ inputs.BRANCH }}
+          tag_name: OFRP
           body: |
             Device: ${{ inputs.DEVICE_CODE }}
-            Type: OrangeFox Recovery Project (OFRP)
+            Type: OrangeFox Recovery Project
             Target: ${{ inputs.BUILD_TARGET }}
-          files: ofrp/out/target/product/${{ inputs.DEVICE_NAME }}/OrangeFox-unofficial-${{ inputs.DEVICE_NAME }}.img
+          files: OrangeFox-unofficial-${{ inputs.DEVICE_NAME }}.img
