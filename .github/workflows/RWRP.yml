@@ -63,31 +63,31 @@ jobs:
 
       - name: Git Config
         run: |
-          rm -rf rwrp
-          mkdir rwrp
-          cd rwrp
+          rm -rf ~/rwrp
+          mkdir ~/rwrp
+          cd ~/rwrp
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
           git config --global user.name "${{ github.actor }}"
           
       - name: Sync Minimal Manifest
         run: |
-          cd rwrp
+          cd ~/rwrp
           repo init --depth=1 -u https://github.com/RedWolfRecovery/rw_manifest.git -b ${{ inputs.MANIFEST_BRANCH }}
           
       - name: Sync Source
         run: |
-          cd rwrp
+          cd ~/rwrp
           repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
           rm -rf .rep
       
       - name: Clone Device Tree
         run: |
-          cd rwrp
+          cd ~/rwrp
           git clone -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_TREE_URL }} device/${{ inputs.BRAND }}/${{ inputs.DEVICE_CODE }}
 
       - name: Compile Custom Recovery 
         run: |
-          cd rwrp
+          cd ~/rwrp
           chmod 777 build/envsetup.sh
           export ALLOW_MISSING_DEPENDENCIES=true
           ${{ inputs.ADD_EXPORT }}
@@ -98,8 +98,7 @@ jobs:
 
       - name: Rename File
         run: |
-          cd rwrp/out/target/product/${{ inputs.DEVICE_CODE }}
-          mv ${{ inputs.BUILD_TARGET }}.img UnofficialRedWolf-${{ inputs.DEVICE_CODE }}.img
+          mv ~/rwrp/out/target/product/${{ inputs.DEVICE_CODE }}/${{ inputs.BUILD_TARGET }}.img UnofficialRedWolf-${{ inputs.DEVICE_CODE }}.img
 
       - name: Upload to Release
         uses: softprops/action-gh-release@v1
@@ -112,4 +111,4 @@ jobs:
             Device: ${{ inputs.DEVICE_CODE }}
             Type: RedWolf Recovery Project
             Target: ${{ inputs.BUILD_TARGET }}
-          files: rwrp/out/target/product/${{ inputs.DEVICE_CODE }}/UnofficialRedWolf-${{ inputs.DEVICE_CODE }}.img
+          files: UnofficialRedWolf-${{ inputs.DEVICE_CODE }}.img
