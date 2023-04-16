@@ -69,13 +69,13 @@ jobs:
           sudo bash setup/install_android_sdk.sh
         continue-on-error: true
         
-      - name: Sync Source
+      - name: Sync Minimal Manifest
         run: |
           mkdir ~/ofrp
           cd ~/ofrp
           git clone https://gitlab.com/OrangeFox/sync.git
 
-      - name: Sync Minimal Manifest
+      - name: Sync Source
         run: |
           cd ~/ofrp/sync
           chmod 777 orangefox_sync.sh
