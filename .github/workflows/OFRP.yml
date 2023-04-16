@@ -71,14 +71,13 @@ jobs:
         
       - name: Sync Minimal Manifest
         run: |
-          mkdir ~/ofrp
-          cd ~/ofrp
+          mkdir ~/ofrp_sync
+          cd ~/ofrp_sync
           git clone https://gitlab.com/OrangeFox/sync.git
 
       - name: Sync Source
         run: |
-          cd ~/ofrp/sync
-          chmod 777 orangefox_sync.sh
+          cd ~/ofrp_sync/sync/
           ./orangefox_sync.sh --branch ${{ inputs.BRANCH }} --path ~/ofrp
 
       - name: Clone Device Tree
@@ -89,7 +88,6 @@ jobs:
       - name: Compile Custom Recovery 
         run: |
           cd ~/ofrp
-          chmod 777 build/envsetup.sh
           source build/envsetup.sh
           export ALLOW_MISSING_DEPENDENCIES=true
           export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
