@@ -79,12 +79,12 @@ jobs:
         run: |
           cd ~/ofrp/sync
           chmod 777 orangefox_sync.sh
-          sudo ./orangefox_sync.sh --branch ${{ inputs.BRANCH }} --path ~/ofrp
+          ./orangefox_sync.sh --branch ${{ inputs.BRANCH }} --path ~/ofrp
 
       - name: Clone Device Tree
         run: |
           cd ~/ofrp
-          sudo 'git clone -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_TREE_URL }} device/${{ inputs.BRAND }}/${{ inputs.DEVICE_CODE }}'
+          git clone -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_TREE_URL }} device/${{ inputs.BRAND }}/${{ inputs.DEVICE_CODE }}
           
       - name: Compile Custom Recovery 
         run: |
