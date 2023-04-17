@@ -1,0 +1,115 @@
+name: OrangeFox-RP Builder - Legacy
+on:
+  workflow_dispatch:
+    inputs:
+      BRANCH:
+        description: 'Branch'
+        required: true
+        default: '10.0'
+        type: choice
+        options:
+        - '10.0'
+        - '9.0'
+        - '8.1'
+        - '7.1'
+        - '6.0'
+      DEVICE_TREE_URL:
+        description: 'Device Tree URL'
+        required: true
+        default: 'https://github.com/partedMagic/android_device_motorola_fiji_64'
+      DEVICE_TREE_BRANCH:
+        description: 'Device Tree Branch'
+        required: true
+        default: 'twrp-fix'
+      BRAND:
+        description: 'Brand'
+        required: true
+        default: 'motorola'
+      DEVICE_CODE:
+        description: 'Device Code'
+        required: true
+        default: 'fiji_64'
+      MAKEFILE_TYPE:
+        description: 'Makefile Type'
+        required: true
+        default: 'twrp'
+        type: choice
+        options:
+          - 'omni'
+      ADD_EXPORT:
+        description: 'Add "export"'
+        required: false
+      BUILD_TARGET:
+        description: 'Build Target'
+        required: true
+        default: 'recovery'
+        type: choice
+        options:
+          - 'recovery'
+          - 'boot'
+jobs:
+  OrangeFox-Recovery-Project:
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Free up space
+        run: bash sh/unin.sh
+
+      - name: Set up the Compilation environment
+        run: |
+          bash sh/sudo.sh
+          cd ~
+          git clone https://gitlab.com/OrangeFox/misc/scripts
+          cd scripts
+          sudo bash setup/android_build_env.sh
+          sudo bash setup/install_android_sdk.sh
+        continue-on-error: true
+        
+      - name: Sync Minimal Manifest
+        run: |
+          mkdir ~/ofrp_sync
+          cd ~/ofrp_sync
+          git clone https://github.com/partedMagic/orangefox-legacy-git.git
+
+      - name: Sync Source
+        run: |
+          cd ~/ofrp_sync/orangefox-legacy-git/
+          mkdir ~/ofrp
+          ./orangefox_sync_legacy.sh --branch ${{ inputs.BRANCH }} --path ~/ofrp
+
+      - name: Clone Device Tree
+        run: |
+          cd ~/ofrp
+          git clone -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_TREE_URL }} device/${{ inputs.BRAND }}/${{ inputs.DEVICE_CODE }}
+          
+      - name: Compile Custom Recovery 
+        run: |
+          cd ~/ofrp
+          source build/envsetup.sh
+          export ALLOW_MISSING_DEPENDENCIES=true
+          export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
+          export LC_ALL="C"
+          ${{ inputs.ADD_EXPORT }}
+          lunch ${{ inputs.MAKEFILE_TYPE }}_${{ inputs.DEVICE_CODE }}-eng
+          mka ${{ inputs.BUILD_TARGET }}image
+
+      - name: Rename File 
+        run: |
+          mv ~/ofrp/out/target/product/${{ inputs.DEVICE_NAME }}/OrangeFox-unofficial-${{ inputs.DEVICE_NAME }}.img OrangeFox-unofficial-${{ inputs.DEVICE_NAME }}.img
+
+      - name: Upload to Release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          name: Custom Recovery for ${{ inputs.DEVICE_CODE }}
+          tag_name: OFRP-Legacy
+          body: |
+            Device: ${{ inputs.DEVICE_CODE }}
+            Type: OrangeFox Recovery Project
+            Target: ${{ inputs.BUILD_TARGET }}
+          files: OrangeFox-unofficial-${{ inputs.DEVICE_NAME }}.img
