@@ -8,6 +8,7 @@
 | **Evolution X** |  |  | (Coming soon) |  |
 | **TeamWin Recovery Project** | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/TWRP.yml) | [TWRP.yml](.github/workflows/TWRP.yml) | Finished  |  |
 | **OrangeFox Recovery Project** | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/OFRP.yml) | [OFRP.yml](.github/workflows/OFRP.yml) | Fixing bugs |  |
+| **OrangeFox Recovery Project -  Legacy** | [Actions](https://github.com/partedMagic/ROM_Recovery-Builder-Workflows/actions/workflows/OFRP_Legacy.yml) | [OFRP_Legacy.yml](.github/workflows/OFRP_Legacy.yml) | Not tested |  |
 | **PitchBlack Recovery Project** | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/PBRP.yml) | [PBRP.yml](.github/workflows/PBRP.yml) | Finished | [Note](https://github.com/VThang51/ROM_Recovery-Builder-Workflows/blob/main/README.md#pitchblack-recovery-project) |
 | **SkyHawk Recovery Project** | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/SHRP.yml) | [SHRP.yml](.github/workflows/SHRP.yml) | Finished |  |
 | **RedWolf Recovery Project** | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/RWRP.yml) | [RWRP.yml](.github/workflows/RWRP.yml) |  |  |
@@ -18,7 +19,8 @@
 - 1, Let's move to the `Actions` tab
 - 2, Choose your Custom Recovery
 ```bash
-OrangeFox-RP Builder (Fixing Bug)
+OrangeFox-RP Builder (Fixing Bugs)
+OrangeFox-RP Legacy Builder (Not tested!)
 PitchBlack-RP Builder
 RedWolf-RP Builder
 SkyHawk-RP Builder
