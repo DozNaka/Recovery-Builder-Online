@@ -8,16 +8,16 @@ on:
         default: '12.1'
         type: choice
         options:
-        - '11.0'
-        - '12.1'
+          - '11.0'
+          - '12.1'
       SSH:
         description: 'Use SSH'
         required: true
         default: '0'
         type: choice
         options:
-        - '0'
-        - '1'
+          - '0'
+          - '1'
       DEVICE_TREE_URL:
         description: 'Device Tree URL'
         required: true
