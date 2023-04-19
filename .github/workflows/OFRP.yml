@@ -10,6 +10,14 @@ on:
         options:
         - '11.0'
         - '12.1'
+      SSH:
+        description: 'Use SSH'
+        required: true
+        default: '0'
+        type: choice
+        options:
+        - '0'
+        - '1'
       DEVICE_TREE_URL:
         description: 'Device Tree URL'
         required: true
@@ -74,12 +82,10 @@ jobs:
           mkdir ~/ofrp_sync
           cd ~/ofrp_sync
           git clone https://gitlab.com/OrangeFox/sync.git
-
       - name: Sync Source
         run: |
           cd ~/ofrp_sync/sync/
-          ./orangefox_sync.sh --branch ${{ inputs.BRANCH }} --path ~/ofrp
-
+          ./orangefox_sync.sh --branch ${{ inputs.BRANCH }} --ssh ${{ inputs.SSH }} --path ~/ofrp
       - name: Clone Device Tree
         run: |
           cd ~/ofrp
@@ -100,7 +106,6 @@ jobs:
       - name: Rename File 
         run: |
           mv ~/ofrp/out/target/product/${{ inputs.DEVICE_NAME }}/OrangeFox-unofficial-${{ inputs.DEVICE_NAME }}.img OrangeFox-unofficial-${{ inputs.DEVICE_NAME }}.img
-
       - name: Upload to Release
         uses: softprops/action-gh-release@v1
         env:
