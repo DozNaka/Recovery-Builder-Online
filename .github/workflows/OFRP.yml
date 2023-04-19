@@ -82,10 +82,12 @@ jobs:
           mkdir ~/ofrp_sync
           cd ~/ofrp_sync
           git clone https://gitlab.com/OrangeFox/sync.git
+
       - name: Sync Source
         run: |
           cd ~/ofrp_sync/sync/
           ./orangefox_sync.sh --branch ${{ inputs.BRANCH }} --ssh ${{ inputs.SSH }} --path ~/ofrp
+
       - name: Clone Device Tree
         run: |
           cd ~/ofrp
@@ -101,6 +103,7 @@ jobs:
           ${{ inputs.ADD_EXPORT }}
           lunch ${{ inputs.MAKEFILE_TYPE }}_${{ inputs.DEVICE_CODE }}-eng
           mka ${{ inputs.BUILD_TARGET }}image
+        continue-on-error: true
 
       - name: Rename File 
         run: |
