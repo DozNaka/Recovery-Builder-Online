@@ -96,6 +96,7 @@ jobs:
           ${{ inputs.ADD_EXPORT }}
           lunch ${{ inputs.MAKEFILE_TYPE }}_${{ inputs.DEVICE_CODE }}-eng
           mka ${{ inputs.BUILD_TARGET }}image
+        continue-on-error: true
 
       - name: Rename File 
         run: |
