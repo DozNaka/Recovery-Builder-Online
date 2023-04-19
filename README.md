@@ -6,12 +6,12 @@
 | **CorvusOS** |  |  | (Coming soon) |  |
 | **LineageOS** |  |  | (Coming soon) |  |
 | **Evolution X** |  |  | (Coming soon) |  |
-| **TeamWin Recovery Project** | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/TWRP.yml) | [TWRP.yml](.github/workflows/TWRP.yml) | Finished  |  |
-| **OrangeFox Recovery Project** | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/OFRP.yml) | [OFRP.yml](.github/workflows/OFRP.yml) | Fixing bugs |  |
-| **OrangeFox Recovery Project -  Legacy** | [Actions](https://github.com/partedMagic/ROM_Recovery-Builder-Workflows/actions/workflows/OFRP_Legacy.yml) | [OFRP_Legacy.yml](.github/workflows/OFRP_Legacy.yml) | Not tested |  |
-| **PitchBlack Recovery Project** | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/PBRP.yml) | [PBRP.yml](.github/workflows/PBRP.yml) | Finished | [Note](https://github.com/VThang51/ROM_Recovery-Builder-Workflows/blob/main/README.md#pitchblack-recovery-project) |
-| **SkyHawk Recovery Project** | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/SHRP.yml) | [SHRP.yml](.github/workflows/SHRP.yml) | Finished |  |
-| **RedWolf Recovery Project** | [Actions](https://github.com/VThang51/Recovery-Builder-Workflows/actions/workflows/RWRP.yml) | [RWRP.yml](.github/workflows/RWRP.yml) |  |  |
+| **TeamWin Recovery Project** | [Actions](https://github.com/VThang51/ROM_Recovery-Builder/actions/workflows/TWRP.yml) | [TWRP.yml](.github/workflows/TWRP.yml) | Finished  |  |
+| **OrangeFox Recovery Project** | [Actions](https://github.com/VThang51/ROM_Recovery-Builder/actions/workflows/OFRP.yml) | [OFRP.yml](.github/workflows/OFRP.yml) | Fixing bugs |  |
+| **OrangeFox Recovery Project -  Legacy** | [Actions](https://github.com/VThang51/ROM_Recovery-Builder/blob/main/.github/workflows/OFRP_Legacy.yml) | [OFRP_Legacy.yml](.github/workflows/OFRP_Legacy.yml) | Not tested |  |
+| **PitchBlack Recovery Project** | [Actions](https://github.com/VThang51/ROM_Recovery-Builder/actions/workflows/PBRP.yml) | [PBRP.yml](.github/workflows/PBRP.yml) | Finished | [Note](https://github.com/VThang51/ROM_Recovery-Builder-Workflows/blob/main/README.md#pitchblack-recovery-project) |
+| **SkyHawk Recovery Project** | [Actions](https://github.com/VThang51/ROM_Recovery-Builder/actions/workflows/SHRP.yml) | [SHRP.yml](.github/workflows/SHRP.yml) | Finished |  |
+| **RedWolf Recovery Project** | [Actions](https://github.com/VThang51/ROM_Recovery-Builder/actions/workflows/RWRP.yml) | [RWRP.yml](.github/workflows/RWRP.yml) |  |  |
 | (There will be more in the future) |  |  |  |  |
 
 - DON'T FORGET TO READ THE NOTES
