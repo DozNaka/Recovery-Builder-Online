@@ -120,7 +120,7 @@ jobs:
 
       - name: Rename File 
         run: |
-          mv ~/ofrp/out/target/product/${{ inputs.DEVICE_NAME }}/OrangeFox-unofficial-${{ inputs.DEVICE_NAME }}.img OrangeFox-unofficial-${{ inputs.DEVICE_NAME }}.img
+          mv ~/ofrp/out/target/product/${{ inputs.DEVICE_CODE }}/OrangeFox-unofficial-${{ inputs.DEVICE_CODE }}.img OrangeFox-unofficial-${{ inputs.DEVICE_CODE }}.img
       - name: Upload to Release
         uses: softprops/action-gh-release@v1
         env:
@@ -132,4 +132,4 @@ jobs:
             Device: ${{ inputs.DEVICE_CODE }}
             Type: OrangeFox Recovery Project
             Target: ${{ inputs.BUILD_TARGET }}
-          files: OrangeFox-unofficial-${{ inputs.DEVICE_NAME }}.img
+          files: OrangeFox-unofficial-${{ inputs.DEVICE_CODE }}.img
