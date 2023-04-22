@@ -44,12 +44,12 @@ TeamWin-RP Builder
 ## General Note
 - If you intend to develop this project, please clone this repository or submit a pull request.
 - Thank you!!! 
-- Contact me at [Telegram](https://t.me/VThang51), [Facebook (Messenger)](https://m.me/thang.nguyenviet.05112007), [Email](mailto:vietthang0511.2@gmail.com)
 
 ### PitchBlack Recovery Project
 - In your device tree, open the file omni_<device>.mk (or twrp_<device>.mk or aosp_<device>.mk) and edit `vendor/omni...` to `vendor/pb` so you won't get an issue when building!
 
 # Thanks to the contributors
 - [PartedMagic](https://github.com/partedMagic)
+- [Nguyễn Viết Thắng](https://github.com/VThang51) ([Telegram](https://t.me/VThang51), [Facebook (Messenger)](https://m.me/thang.nguyenviet.05112007), [Email](mailto:vietthang0511.2@gmail.com))
 
 Thank you for your contributions to this project!!!
