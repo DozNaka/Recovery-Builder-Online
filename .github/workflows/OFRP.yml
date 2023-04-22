@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       SYNC_FILE:
-        description: 'OrangeFox Sync File'
+        description: 'Sync File'
         required: true
         default: './orangefox_sync.sh'
         type: choice
@@ -65,8 +65,8 @@ on:
         type: choice
         options:
           - 'recovery'
-          - 'adbd recovery'
           - 'boot'
+          - 'adbd recovery'
           - 'adbd boot'
 jobs:
   OrangeFox-Recovery-Project:
