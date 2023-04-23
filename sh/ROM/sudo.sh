@@ -1,3 +1,5 @@
+sudo add-apt-repository ppa:open-jdk-r/ppa
+
 sudo apt-get -y update
 sudo apt-get -y upgrade
 
