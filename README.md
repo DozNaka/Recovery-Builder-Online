@@ -19,6 +19,7 @@
 - 1, Let's move to the `Actions` tab
 - 2, Choose your Custom Recovery
 ```bash
+LineageOS Builder (Developing)
 OrangeFox-RP Builder (Fixing Bugs)
 OrangeFox-RP Legacy Builder (Not tested!)
 PitchBlack-RP Builder
