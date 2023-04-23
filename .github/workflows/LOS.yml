@@ -14,7 +14,7 @@ on:
           - 'stable/cm-13.0-ZNH2K'
           - 'stable/cm-13.0-ZNH5Y'
           - 'cm-13.0'
-          - 'translations/cm-14.1
+          - 'translations/cm-14.1'
           - 'cm-14.1'
           - 'lineage-15.0'
           - 'staging/lineage-15.1'
@@ -102,19 +102,14 @@ jobs:
           croot
           brunch ${{ inputs.DEVICE_CODE }}
 
-      - name: Rename File
-        run: |
-          mv ~/los/out/target/product/${{ inputs.DEVICE_CODE }}/${{ inputs.BUILD_TARGET }}.img unofficialtwrp-${{ inputs.DEVICE_CODE }}.img
-
       - name: Upload to Release
         uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           name: Custom Recovery for ${{ inputs.DEVICE_CODE }}
-          tag_name: TWRP
+          tag_name: LOS
           body: |
             Device: ${{ inputs.DEVICE_CODE }}
-            Type: TeamWin Recovery Project
-            Target: ${{ inputs.BUILD_TARGET }}
+            Type: LineageOS
           files: unofficialtwrp-${{ inputs.DEVICE_CODE }}.img
