@@ -58,10 +58,10 @@ jobs:
         uses: actions/checkout@master
         
       - name: Free up space
-        run: bash sh/unin.sh
+        run: bash sh/RP/unin.sh
 
       - name: Set up the Compilation environment
-        run: bash sh/sudo.sh
+        run: bash sh/RP/sudo.sh
 
       - name: Git Config
         run: |
