@@ -100,7 +100,7 @@ jobs:
 
       - name: Rename File
         run: |
-          MV ~/shrp/out/target/product/${{ inputs.DEVICE_CODE }}/${{ inputs.BUILD_TARGET }}.img SHRP-Unofficial_${{ inputs.DEVICE_CODE }}-$(date +%H%M%d%m%Y).img
+          mv ~/shrp/out/target/product/${{ inputs.DEVICE_CODE }}/${{ inputs.BUILD_TARGET }}.img SHRP-Unofficial_${{ inputs.DEVICE_CODE }}-$(date +%H%M%d%m%Y).img
 
       - name: Upload to Release
         uses: softprops/action-gh-release@v1
