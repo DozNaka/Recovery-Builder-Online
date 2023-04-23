@@ -4,7 +4,7 @@
 | Custom ROM, Recovery | Workflows | File Name | Status | Note |
 | :------------------- | :-------: | :-------: | :----: | :--: |
 | **CorvusOS** |  |  | Coming soon |  |
-| **LineageOS** |  |  | Coming soon |  |
+| **LineageOS** |  |  | Is in the process of development |  |
 | **Evolution X** |  |  | Coming soon |  |
 | **TeamWin Recovery Project** | [Actions](https://github.com/VThang51/ROM_Recovery-Builder/actions/workflows/TWRP.yml) | [TWRP.yml](.github/workflows/TWRP.yml) | Finished  |  |
 | **OrangeFox Recovery Project** | [Actions](https://github.com/VThang51/ROM_Recovery-Builder/actions/workflows/OFRP.yml) | [OFRP.yml](.github/workflows/OFRP.yml) | Fixing bugs |  |
