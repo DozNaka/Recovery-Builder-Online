@@ -46,7 +46,7 @@ on:
       DEVICE_CODE:
         description: 'Device Code'
         required: true
-        default: 'a13x'
+        default: 'a13'
       MAKEFILE_TYPE:
         description: 'Makefile Type'
         required: true
@@ -84,7 +84,7 @@ jobs:
         run: |
           bash sh/RP/sudo.sh
           sudo apt remove python3
-          sudo update-alternatives --set python /usr/bin/python2
+          sudo apt install python-is-python2
           cd ~
           git clone https://gitlab.com/OrangeFox/misc/scripts
           cd scripts
