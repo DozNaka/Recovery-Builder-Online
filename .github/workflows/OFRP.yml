@@ -78,11 +78,11 @@ jobs:
         uses: actions/checkout@master
 
       - name: Free up space
-        run: bash sh/unin.sh
+        run: bash sh/RP/unin.sh
 
       - name: Set up the Compilation environment
         run: |
-          bash sh/sudo.sh
+          bash sh/RP/sudo.sh
           sudo apt remove python3
           sudo update-alternatives --set python /usr/bin/python2
           cd ~
