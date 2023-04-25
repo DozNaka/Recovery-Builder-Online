@@ -87,7 +87,6 @@ jobs:
       - name: Prepare the device-specific code
         run: |
           cd ~/los
-          chmod 777 build/envsetup.sh
           source build/envsetup.sh
           breakfast ${{ inputs.DEVICE_CODE }}
 
@@ -101,15 +100,3 @@ jobs:
           cd ~/los
           croot
           brunch ${{ inputs.DEVICE_CODE }}
-
-      - name: Upload to Release
-        uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          name: Custom Recovery for ${{ inputs.DEVICE_CODE }}
-          tag_name: LOS
-          body: |
-            Device: ${{ inputs.DEVICE_CODE }}
-            Type: LineageOS
-          files: unofficialtwrp-${{ inputs.DEVICE_CODE }}.img
