@@ -1,0 +1,116 @@
+name: SkyHawk-RP Builder
+on:
+  workflow_dispatch:
+    inputs:
+      MANIFEST_BRANCH:
+        description: 'Manifest Branch'
+        required: true
+        default: 'shrp-12.1'
+        type: choice
+        options:
+          - 'v3_9.0'
+          - 'v3_10.0'
+          - 'v3_11.0'
+          - 'shrp-12.1'
+      DEVICE_TREE_URL:
+        description: 'Device Tree URL'
+        required: true
+        default: 'https://github.com/VThang51/android_device_samsung_a13'
+      DEVICE_TREE_BRANCH:
+        description: 'Device Tree Branch'
+        required: true
+        default: 'master'
+      BRAND:
+        description: 'Brand'
+        required: true
+        default: 'samsung'
+      DEVICE_CODE:
+        description: 'Device Code'
+        required: true
+        default: 'a13x'
+      MAKEFILE_TYPE:
+        description: 'Makefile Type'
+        required: true
+        default: 'twrp'
+        type: choice
+        options:
+          - 'omni'
+          - 'twrp'
+      ADD_EXPORT:
+        description: 'Add "export"'
+        required: false
+      BUILD_TARGET:
+        description: 'Build Target'
+        required: true
+        default: 'recovery'
+        type: choice
+        options:
+          - 'recovery'
+          - 'boot'
+          - 'vendorboot'
+jobs:
+  SkyHawk-Recovery-Project:
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+        
+      - name: Free up space
+        run: bash sh/RP/unin.sh
+
+      - name: Set up the Compilation environment
+        run: bash sh/RP/sudo.sh
+
+      - name: Git Config
+        run: |
+          rm -rf ~/shrp
+          mkdir ~/shrp
+          cd ~/shrp
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git config --global user.name "${{ github.actor }}"
+          
+      - name: Sync Minimal Manifest
+        run: |
+          cd ~/shrp
+          repo init --depth=1 -u https://github.com/SHRP/manifest.git -b ${{ inputs.MANIFEST_BRANCH }}
+          
+      - name: Sync Source
+        run: |
+          cd ~/shrp
+          repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
+          rm -rf .rep
+      
+      - name: Clone Device Tree
+        run: |
+          cd ~/shrp
+          git clone -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_TREE_URL }} device/${{ inputs.BRAND }}/${{ inputs.DEVICE_CODE }}
+
+      - name: Compile Custom Recovery 
+        run: |
+          cd ~/shrp
+          chmod 777 build/envsetup.sh
+          export ALLOW_MISSING_DEPENDENCIES=true
+          ${{ inputs.ADD_EXPORT }}
+          . build/envsetup.sh
+          lunch ${{ inputs.MAKEFILE_TYPE }}_${{ inputs.DEVICE_CODE }}-eng
+          mka ${{ inputs.BUILD_TARGET }}image
+        continue-on-error: true
+
+      - name: Rename File
+        run: |
+          mv ~/shrp/out/target/product/${{ inputs.DEVICE_CODE }}/${{ inputs.BUILD_TARGET }}.img SHRP-Unofficial_${{ inputs.DEVICE_CODE }}.img
+
+      - name: Upload to Release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          name: Custom Recovery for ${{ inputs.DEVICE_CODE }}
+          tag_name: SHRP
+          body: |
+            Device: ${{ inputs.DEVICE_CODE }}
+            Type: SkyHawk Recovery Project
+            Target: ${{ inputs.BUILD_TARGET }}
+          files: SHRP-Unofficial_${{ inputs.DEVICE_CODE }}.img
