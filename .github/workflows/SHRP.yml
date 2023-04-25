@@ -100,7 +100,7 @@ jobs:
 
       - name: Rename File
         run: |
-          mv ~/shrp/out/target/product/${{ inputs.DEVICE_CODE }}/${{ inputs.BUILD_TARGET }}.img SHRP-Unofficial_${{ inputs.DEVICE_CODE }}-$(date +%H%M%d%m%Y).img
+          mv ~/shrp/out/target/product/${{ inputs.DEVICE_CODE }}/${{ inputs.BUILD_TARGET }}.img SHRP-Unofficial_${{ inputs.DEVICE_CODE }}.img
 
       - name: Upload to Release
         uses: softprops/action-gh-release@v1
@@ -113,4 +113,4 @@ jobs:
             Device: ${{ inputs.DEVICE_CODE }}
             Type: SkyHawk Recovery Project
             Target: ${{ inputs.BUILD_TARGET }}
-          files: SHRP-Unofficial_${{ inputs.DEVICE_CODE }}-$(date +%H%M%d%m%Y).img
+          files: SHRP-Unofficial_${{ inputs.DEVICE_CODE }}.img
