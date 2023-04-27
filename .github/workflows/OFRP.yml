@@ -82,6 +82,7 @@ jobs:
 
       - name: Set up the Compilation environment
         run: |
+          sed -i '11d' sh/RP/sudo.sh
           bash sh/RP/sudo.sh
           sudo apt remove python3
           sudo apt install python-is-python2
