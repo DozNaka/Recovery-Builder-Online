@@ -117,15 +117,8 @@ jobs:
         run: |
           mv ~/twrp/out/target/product/${{ inputs.DEVICE_CODE }}/${{ inputs.BUILD_TARGET }}.img unofficialtwrp-${{ inputs.DEVICE_CODE }}.img
 
-      - name: Upload to Release
-        uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          name: Custom Recovery for ${{ inputs.DEVICE_CODE }}
-          tag_name: TWRP
-          body: |
-            Device: ${{ inputs.DEVICE_CODE }}
-            Type: TeamWin Recovery Project
-            Target: ${{ inputs.BUILD_TARGET }}
-          files: unofficialtwrp-${{ inputs.DEVICE_CODE }}.img
+      - name: Upload to Artifacts
+         uses: actions/upload-artifact@v3
+         with:
+            name: unofficialtwrp-${{ inputs.DEVICE_CODE }}.img
+            path: unofficialtwrp-${{ inputs.DEVICE_CODE }}.img
