@@ -5,11 +5,11 @@ on:
       SYNC_FILE:
         description: 'Sync File'
         required: true
-        default: './orangefox_sync.sh'
+        default: 'orangefox_sync.sh'
         type: choice
         options:
-          - './legacy/orangefox_sync_legacy.sh'
-          - './orangefox_sync.sh'
+          - 'legacy/orangefox_sync_legacy.sh'
+          - 'orangefox_sync.sh'
       BRANCH:
         description: 'Branch'
         required: true
@@ -102,7 +102,7 @@ jobs:
       - name: Sync Source
         run: |
           cd ~/ofrp/sync/
-          ${{ inputs.SYNC_FILE }} --branch ${{ inputs.BRANCH }} --path ~/ofrp --ssh ${{ inputs.SSH }}
+          ./${{ inputs.SYNC_FILE }} --branch ${{ inputs.BRANCH }} --path ~/ofrp --ssh ${{ inputs.SSH }}
 
       - name: Clone Device Tree
         run: |
