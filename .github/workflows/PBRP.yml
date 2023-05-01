@@ -108,15 +108,8 @@ jobs:
         run: |
           mv ~/pbrp/out/target/product/${{ inputs.DEVICE_CODE }}/${{ inputs.BUILD_TARGET }}.img PBRP-${{ inputs.DEVICE_CODE }}-UNOFFICIAL.img
 
-      - name: Upload to Release
-        uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload to Artifacts
+        uses: actions/upload-artifact@v3
         with:
-          name: Custom Recovery for ${{ inputs.DEVICE_CODE }}
-          tag_name: PBRP
-          body: |
-            Device: ${{ inputs.DEVICE_CODE }}
-            Type: PitchBlack Recovery Project
-            Target: ${{ inputs.BUILD_TARGET }}
-          files: PBRP-${{ inputs.DEVICE_CODE }}-UNOFFICIAL.img
+          name: PBRP-${{ inputs.DEVICE_CODE }}-UNOFFICIAL.img
+          path: /home/runner/work/ROM_Recovery-Builder/ROM_Recovery-Builder/PBRP-${{ inputs.DEVICE_CODE }}-UNOFFICIAL.img
