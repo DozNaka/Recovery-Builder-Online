@@ -81,6 +81,7 @@ jobs:
           cd ~/shrp
           repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
           rm -rf .rep
+        continue-on-error: true
       
       - name: Clone Device Tree
         run: |
@@ -102,15 +103,8 @@ jobs:
         run: |
           mv ~/shrp/out/target/product/${{ inputs.DEVICE_CODE }}/${{ inputs.BUILD_TARGET }}.img SHRP-Unofficial_${{ inputs.DEVICE_CODE }}.img
 
-      - name: Upload to Release
-        uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload to Artifacts
+        uses: actions/upload-artifact@v3
         with:
-          name: Custom Recovery for ${{ inputs.DEVICE_CODE }}
-          tag_name: SHRP
-          body: |
-            Device: ${{ inputs.DEVICE_CODE }}
-            Type: SkyHawk Recovery Project
-            Target: ${{ inputs.BUILD_TARGET }}
-          files: SHRP-Unofficial_${{ inputs.DEVICE_CODE }}.img
+          name: SHRP-Unofficial_${{ inputs.DEVICE_CODE }}.img
+          path: /home/runner/work/ROM_Recovery-Builder/ROM_Recovery-Builder/SHRP-Unofficial_${{ inputs.DEVICE_CODE }}.img
