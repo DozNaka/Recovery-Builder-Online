@@ -100,15 +100,8 @@ jobs:
         run: |
           mv ~/rwrp/out/target/product/${{ inputs.DEVICE_CODE }}/${{ inputs.BUILD_TARGET }}.img UnofficialRedWolf-${{ inputs.DEVICE_CODE }}.img
 
-      - name: Upload to Release
-        uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload to Artifacts
+        uses: actions/upload-artifact@v3
         with:
-          name: Custom Recovery for ${{ inputs.DEVICE_CODE }}
-          tag_name: RWRP
-          body: |
-            Device: ${{ inputs.DEVICE_CODE }}
-            Type: RedWolf Recovery Project
-            Target: ${{ inputs.BUILD_TARGET }}
-          files: UnofficialRedWolf-${{ inputs.DEVICE_CODE }}.img
+          name: UnofficialRedWolf-${{ inputs.DEVICE_CODE }}.img
+          path: /home/runner/work/ROM_Recovery-Builder/ROM_Recovery-Builder/UnofficialRedWolf-${{ inputs.DEVICE_CODE }}.img
