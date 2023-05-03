@@ -46,7 +46,7 @@ on:
       DEVICE_CODE:
         description: 'Device Code'
         required: true
-        default: 'a13'
+        default: 'a13x'
       MAKEFILE_TYPE:
         description: 'Makefile Type'
         required: true
@@ -116,8 +116,7 @@ jobs:
           export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
           export LC_ALL="C"
           ${{ inputs.ADD_EXPORT }}
-          lunch ${{ inputs.MAKEFILE_TYPE }}_${{ inputs.DEVICE_CODE }}-eng
-          mka ${{ inputs.BUILD_TARGET }}image
+          lunch ${{ inputs.MAKEFILE_TYPE }}_${{ inputs.DEVICE_CODE }}-eng && mka ${{ inputs.BUILD_TARGET }}image
         continue-on-error: true
 
       - name: Rename File 
