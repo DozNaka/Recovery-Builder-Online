@@ -83,7 +83,10 @@ sudo apt remove imagemagick
 sudo apt remove imagemagick-6-common
 sudo apt remove libgl1-mesa-dri
 sudo apt remove firebird*
-sudo apt remove hhvm 
+sudo apt remove hhvm
+sudo apt remove python
+sudo apt remove python2
+sudo apt remove python3
 
 sudo rm -rf /home/linuxbrew
 sudo rm -rf /usr/bin/docker-credential-ecr-login
