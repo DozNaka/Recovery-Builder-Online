@@ -84,7 +84,6 @@ jobs:
         run: |
           sed -i '11d' sh/RP/sudo.sh
           bash sh/RP/sudo.sh
-          sudo apt remove python3
           sudo apt install python-is-python2
           cd ~
           git clone https://gitlab.com/OrangeFox/misc/scripts
