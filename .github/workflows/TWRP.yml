@@ -43,6 +43,9 @@ on:
         description: 'Device Code'
         required: true
         default: 'a13x'
+      ADD_MAKE:
+        description: 'Add "make"'
+        required: false
       MAKEFILE_TYPE:
         description: 'Makefile Type'
         required: true
@@ -109,6 +112,7 @@ jobs:
           export ALLOW_MISSING_DEPENDENCIES=true
           ${{ inputs.ADD_EXPORT }}
           . build/envsetup.sh
+          ${{ inputs.ADD_MAKE }}
           lunch ${{ inputs.MAKEFILE_TYPE }}_${{ inputs.DEVICE_CODE }}-eng
           mka ${{ inputs.BUILD_TARGET }}image
         continue-on-error: true
