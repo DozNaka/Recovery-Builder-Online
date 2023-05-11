@@ -125,4 +125,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: unofficialtwrp-${{ inputs.DEVICE_CODE }}.img
-          path: /home/runner/work/${{ github.repository }}/${{ github.repository }}/unofficialtwrp-${{ inputs.DEVICE_CODE }}.img
+          path: /home/runner/work/ROM_Recovery-Builder/ROM_Recovery-Builder/unofficialtwrp-${{ inputs.DEVICE_CODE }}.img
