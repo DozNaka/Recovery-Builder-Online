@@ -1,32 +1,15 @@
-name: TeamWin-RP Builder
+name: RedWolf-RP Builder
 on:
   workflow_dispatch:
     inputs:
-      MANIFEST_TYPE:
-        description: 'Manifest Type'
-        required: true
-        default: 'aosp'
-        type: choice
-        options:
-          - 'omni'
-          - 'aosp'
-          - 'lineageos'
       MANIFEST_BRANCH:
         description: 'Manifest Branch'
         required: true
-        default: 'twrp-12.1'
+        default: 'rw-n'
         type: choice
         options:
-          - 'twrp-4.4-deprecated'
-          - 'twrp-5.1'
-          - 'twrp-6.0'
-          - 'twrp-7.1'
-          - 'twrp-8.1'
-          - 'twrp-9.0'
-          - 'twrp-10.0-deprecated'
-          - 'twrp-11'
-          - 'twrp-12.1'
-          - 'twrp-14.1'
+          - 'rw'
+          - 'rw-n'
       DEVICE_TREE_URL:
         description: 'Device Tree URL'
         required: true
@@ -43,9 +26,6 @@ on:
         description: 'Device Code'
         required: true
         default: 'a13x'
-      ADD_MAKE:
-        description: 'Add "make"'
-        required: false
       MAKEFILE_TYPE:
         description: 'Makefile Type'
         required: true
@@ -67,7 +47,7 @@ on:
           - 'boot'
           - 'vendorboot'
 jobs:
-  TeamWin-Recovery-Project:
+  RedWolf-Recovery-Project:
     runs-on: ubuntu-20.04
     permissions:
       contents: write
@@ -83,46 +63,45 @@ jobs:
 
       - name: Git Config
         run: |
-          rm -rf ~/twrp
-          mkdir ~/twrp
-          cd ~/twrp
+          rm -rf ~/rwrp
+          mkdir ~/rwrp
+          cd ~/rwrp
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
           git config --global user.name "${{ github.actor }}"
           
       - name: Sync Minimal Manifest
         run: |
-          cd ~/twrp
-          repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_${{ inputs.MANIFEST_TYPE }}.git -b ${{ inputs.MANIFEST_BRANCH }}
+          cd ~/rwrp
+          repo init --depth=1 -u https://github.com/RedWolfRecovery/rw_manifest.git -b ${{ inputs.MANIFEST_BRANCH }}
           
       - name: Sync Source
         run: |
-          cd ~/twrp
+          cd ~/rwrp
           repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
           rm -rf .rep
       
       - name: Clone Device Tree
         run: |
-          cd ~/twrp
+          cd ~/rwrp
           git clone -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_TREE_URL }} device/${{ inputs.BRAND }}/${{ inputs.DEVICE_CODE }}
 
       - name: Compile Custom Recovery 
         run: |
-          cd ~/twrp
+          cd ~/rwrp
           chmod 777 build/envsetup.sh
           export ALLOW_MISSING_DEPENDENCIES=true
           ${{ inputs.ADD_EXPORT }}
           . build/envsetup.sh
-          ${{ inputs.ADD_MAKE }}
           lunch ${{ inputs.MAKEFILE_TYPE }}_${{ inputs.DEVICE_CODE }}-eng
           mka ${{ inputs.BUILD_TARGET }}image
         continue-on-error: true
 
       - name: Rename File
         run: |
-          mv ~/twrp/out/target/product/${{ inputs.DEVICE_CODE }}/${{ inputs.BUILD_TARGET }}.img unofficialtwrp-${{ inputs.DEVICE_CODE }}.img
+          mv ~/rwrp/out/target/product/${{ inputs.DEVICE_CODE }}/${{ inputs.BUILD_TARGET }}.img UnofficialRedWolf-${{ inputs.DEVICE_CODE }}.img
 
       - name: Upload to Artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: unofficialtwrp-${{ inputs.DEVICE_CODE }}.img
-          path: /home/runner/work/ROM_Recovery-Builder/ROM_Recovery-Builder/unofficialtwrp-${{ inputs.DEVICE_CODE }}.img
+          name: UnofficialRedWolf-${{ inputs.DEVICE_CODE }}.img
+          path: /home/runner/work/ROM_Recovery-Builder/ROM_Recovery-Builder/UnofficialRedWolf-${{ inputs.DEVICE_CODE }}.img

@@ -1,32 +1,17 @@
-name: TeamWin-RP Builder
+name: SkyHawk-RP Builder
 on:
   workflow_dispatch:
     inputs:
-      MANIFEST_TYPE:
-        description: 'Manifest Type'
-        required: true
-        default: 'aosp'
-        type: choice
-        options:
-          - 'omni'
-          - 'aosp'
-          - 'lineageos'
       MANIFEST_BRANCH:
         description: 'Manifest Branch'
         required: true
-        default: 'twrp-12.1'
+        default: 'shrp-12.1'
         type: choice
         options:
-          - 'twrp-4.4-deprecated'
-          - 'twrp-5.1'
-          - 'twrp-6.0'
-          - 'twrp-7.1'
-          - 'twrp-8.1'
-          - 'twrp-9.0'
-          - 'twrp-10.0-deprecated'
-          - 'twrp-11'
-          - 'twrp-12.1'
-          - 'twrp-14.1'
+          - 'v3_9.0'
+          - 'v3_10.0'
+          - 'v3_11.0'
+          - 'shrp-12.1'
       DEVICE_TREE_URL:
         description: 'Device Tree URL'
         required: true
@@ -43,9 +28,6 @@ on:
         description: 'Device Code'
         required: true
         default: 'a13x'
-      ADD_MAKE:
-        description: 'Add "make"'
-        required: false
       MAKEFILE_TYPE:
         description: 'Makefile Type'
         required: true
@@ -67,14 +49,14 @@ on:
           - 'boot'
           - 'vendorboot'
 jobs:
-  TeamWin-Recovery-Project:
+  SkyHawk-Recovery-Project:
     runs-on: ubuntu-20.04
     permissions:
       contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@master
-
+        
       - name: Free up space
         run: bash sh/RP/unin.sh
 
@@ -83,46 +65,46 @@ jobs:
 
       - name: Git Config
         run: |
-          rm -rf ~/twrp
-          mkdir ~/twrp
-          cd ~/twrp
+          rm -rf ~/shrp
+          mkdir ~/shrp
+          cd ~/shrp
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
           git config --global user.name "${{ github.actor }}"
           
       - name: Sync Minimal Manifest
         run: |
-          cd ~/twrp
-          repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_${{ inputs.MANIFEST_TYPE }}.git -b ${{ inputs.MANIFEST_BRANCH }}
+          cd ~/shrp
+          repo init --depth=1 -u https://github.com/SHRP/manifest.git -b ${{ inputs.MANIFEST_BRANCH }}
           
       - name: Sync Source
         run: |
-          cd ~/twrp
+          cd ~/shrp
           repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
           rm -rf .rep
+        continue-on-error: true
       
       - name: Clone Device Tree
         run: |
-          cd ~/twrp
+          cd ~/shrp
           git clone -b ${{ inputs.DEVICE_TREE_BRANCH }} ${{ inputs.DEVICE_TREE_URL }} device/${{ inputs.BRAND }}/${{ inputs.DEVICE_CODE }}
 
       - name: Compile Custom Recovery 
         run: |
-          cd ~/twrp
+          cd ~/shrp
           chmod 777 build/envsetup.sh
           export ALLOW_MISSING_DEPENDENCIES=true
           ${{ inputs.ADD_EXPORT }}
           . build/envsetup.sh
-          ${{ inputs.ADD_MAKE }}
           lunch ${{ inputs.MAKEFILE_TYPE }}_${{ inputs.DEVICE_CODE }}-eng
           mka ${{ inputs.BUILD_TARGET }}image
         continue-on-error: true
 
       - name: Rename File
         run: |
-          mv ~/twrp/out/target/product/${{ inputs.DEVICE_CODE }}/${{ inputs.BUILD_TARGET }}.img unofficialtwrp-${{ inputs.DEVICE_CODE }}.img
+          mv ~/shrp/out/target/product/${{ inputs.DEVICE_CODE }}/${{ inputs.BUILD_TARGET }}.img SHRP-Unofficial_${{ inputs.DEVICE_CODE }}.img
 
       - name: Upload to Artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: unofficialtwrp-${{ inputs.DEVICE_CODE }}.img
-          path: /home/runner/work/ROM_Recovery-Builder/ROM_Recovery-Builder/unofficialtwrp-${{ inputs.DEVICE_CODE }}.img
+          name: SHRP-Unofficial_${{ inputs.DEVICE_CODE }}.img
+          path: /home/runner/work/ROM_Recovery-Builder/ROM_Recovery-Builder/SHRP-Unofficial_${{ inputs.DEVICE_CODE }}.img
